@@ -1,0 +1,3260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Care Systems Bio Enzymes - Porque Cuidar é Revolucionar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- design system · tokens (base.css fica de fora: reescreve cor e layout) -->
+<link rel="stylesheet" href="design-system/tokens/typography.css">
+<link rel="stylesheet" href="design-system/tokens/colors.css">
+<link rel="stylesheet" href="design-system/tokens/spacing.css">
+<link rel="stylesheet" href="design-system/tokens/effects.css">
+<!-- three r128 (UMD): so serve as particulas de fundo. o mapa e 2D puro, sem three. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+/* ── RESET & TOKENS ─────────────────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --green-hero:#0B3D2E;          /* verde padrão da hero — fundos de seção */
+  --green-dk:  var(--green-hero);
+  --green-mid: var(--green-hero);
+  --green-lt:  #A8D156;
+  --orange:    #A8D156;
+  --orange-lt: #A8D156;
+  --white:     #FFFFFF;
+  --off:       #F7F7F5;
+  --ink:       #2E7370;
+  --ink2:      var(--green-hero);
+  --ink3:      #719B72;
+  --line:      #DCE8CF;
+  --enzyme:    #2E7370;
+  --clean:     #A8D156;
+  --font:      'Gotham','Arial',sans-serif;
+  --r:         12px;
+  --sh:        0 4px 24px rgba(0,0,0,.10);
+  --sh2:       0 12px 48px rgba(0,0,0,.18);
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--white);color:var(--ink);-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+
+/* ── HEX PATTERN (SVG inline bg) ───────────────────────────────────────── */
+.hex-bg{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpolygon points='30,2 56,16 56,44 30,58 4,44 4,16' fill='none' stroke='%233AB795' stroke-width='0.6' opacity='0.18'/%3E%3C/svg%3E");background-size:60px 52px;}
+
+/* ── SEÇÃO VÍDEO ──────────────────────────────────────────────────────── */
+.video-sec{background:var(--ink);padding:80px 0;position:relative;overflow:hidden;}
+.video-sec::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 100%,rgba(58,183,149,.12),transparent 60%);
+}
+.video-in{max-width:900px;margin:0 auto;padding:0 28px;text-align:center;position:relative;z-index:1;}
+.sec-tag{display:inline-block;font-size:var(--fs-overline);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-lt);margin-bottom:14px;}
+.video-in h2{font-size:clamp(var(--fs-h2),3vw,var(--fs-display-md));font-weight:800;color:var(--white);margin-bottom:14px;line-height:1.15;}
+.video-in p{font-size:var(--fs-body-lg);color:rgba(255,255,255,.55);margin-bottom:40px;line-height:1.7;}
+.video-wrapper{
+  position:relative;background:#0a1a18;border-radius:20px;overflow:hidden;
+  border:1px solid rgba(58,183,149,.25);box-shadow:0 24px 80px rgba(0,0,0,.5);
+  aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+}
+.video-play-btn{
+  width:72px;height:72px;background:var(--green-lt);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 0 0 16px rgba(58,183,149,.15);transition:transform .2s;
+}
+.video-play-btn:hover{transform:scale(1.08);}
+.video-play-btn svg{margin-left:4px;}
+.video-label{font-size:var(--fs-overline);font-weight:600;color:rgba(255,255,255,.4);margin-top:18px;letter-spacing:.06em;text-transform:uppercase;}
+/* [VIDEO] Substituir .video-wrapper por <video> ou <iframe> */
+
+/* ── HISTÓRIA / AUTORIDADE ──────────────────────────────────────────────── */
+.historia{background:var(--white);padding:96px 0;}
+.sec-in{max-width:1160px;margin:0 auto;padding:0 28px;}
+.historia-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.historia-img{
+  aspect-ratio:4/5;background:var(--off);border-radius:20px;
+  border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:12px;color:var(--ink3);position:relative;overflow:hidden;
+}
+.historia-img::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:50%;
+  background:linear-gradient(to top,rgba(0,69,60,.08),transparent);
+}
+/* [IMAGEM HISTÓRIA] Substituir .historia-img por <img src="fundador.jpg"> ou foto da equipe/sede */
+.historia-badge{
+  position:absolute;bottom:20px;left:20px;right:20px;z-index:2;
+  background:var(--green-dk);border-radius:12px;padding:14px 18px;
+  display:flex;align-items:center;gap:12px;
+}
+.historia-badge-text strong{font-size:var(--fs-body-sm);font-weight:800;color:var(--white);display:block;}
+.historia-badge-text span{font-size:var(--fs-caption);color:rgba(255,255,255,.8);}
+.historia-content .sec-tag{color:var(--orange);}
+.historia-content h2{font-size:clamp(var(--fs-h2),3.2vw,var(--fs-display-md));font-weight:900;color:var(--ink);line-height:1.1;letter-spacing:-.02em;margin-bottom:20px;}
+.historia-content h2 strong{color:var(--green-mid);}
+.historia-content p{font-size:var(--fs-body-lg);color:var(--ink2);line-height:1.8;margin-bottom:16px;}
+.historia-pilares{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;}
+.pilar{background:var(--off);border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+.pilar-label{display:flex;align-items:center;gap:7px;font-size:var(--fs-overline);font-weight:700;color:#0a6b3d;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.pilar-ico{width:14px;height:14px;flex:none;}
+.pilar-text{font-size:var(--fs-body-sm);font-weight:600;color:var(--ink);line-height:1.4;}
+.parceiros{margin-top:32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+
+/* ── NÚMEROS / AUTORIDADE ───────────────────────────────────────────────── */
+.numeros{background:var(--green-dk);padding:72px 0;position:relative;overflow:hidden;}
+.numeros::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpolygon points='30,2 56,16 56,44 30,58 4,44 4,16' fill='none' stroke='%233AB795' stroke-width='0.6' opacity='0.1'/%3E%3C/svg%3E");background-size:60px 52px;}
+.numeros-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;position:relative;z-index:1;}
+.num-card{text-align:center;padding:40px 20px;border-right:1px solid rgba(58,183,149,.15);}
+.num-card:last-child{border-right:none;}
+.num-v{font-size:clamp(var(--fs-body-lg),2.2vw,var(--fs-h1));font-weight:900;color:var(--white);line-height:1.15;letter-spacing:-.01em;}
+.num-v span{color:var(--green-lt);}
+.num-l{font-size:var(--fs-overline);font-weight:600;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-top:8px;}
+
+/* ── PRODUTOS DESTAQUE ──────────────────────────────────────────────────── */
+.produtos{background:var(--off);padding:96px 0;}
+.produtos-header{text-align:center;margin-bottom:60px;}
+.produtos-header .sec-tag{color:var(--orange);}
+.produtos-header h2{font-size:clamp(var(--fs-h2),3.2vw,var(--fs-display-md));font-weight:900;color:var(--ink);line-height:1.1;letter-spacing:-.02em;max-width:600px;margin:12px auto 0;}
+.produto-cards{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+
+/* Card LIPAX ENZYME */
+.prod-card{border-radius:20px;overflow:hidden;box-shadow:var(--sh2);}
+.prod-card-header{padding:32px 32px 0;display:flex;justify-content:space-between;align-items:flex-start;}
+.prod-card-header .prod-tag{font-size:var(--fs-overline);font-weight:800;padding:6px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.08em;}
+.prod-card-img{
+  margin:24px 32px;height:200px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:10px;border:1px dashed;
+}
+/* [IMG PRODUTO] Substituir .prod-card-img por <img src="lipax-enzyme.png"> */
+.prod-card-body{padding:0 32px 32px;}
+.prod-name{font-size:var(--fs-h3);font-weight:900;line-height:1;letter-spacing:-.02em;margin-bottom:8px;}
+.prod-sub{font-size:var(--fs-caption);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;opacity:.7;}
+.prod-desc{font-size:var(--fs-body);line-height:1.75;margin-bottom:20px;}
+.prod-enzimas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.prod-enzima-tag{font-size:var(--fs-overline);font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;}
+.prod-specs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px;}
+.prod-spec{padding:10px 14px;border-radius:10px;}
+.prod-spec-k{font-size:var(--fs-overline);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.prod-spec-v{font-size:var(--fs-body-sm);font-weight:800;}
+.prod-sizes{display:flex;gap:8px;align-items:center;margin-bottom:24px;}
+.prod-size{font-size:var(--fs-caption);font-weight:700;padding:6px 14px;border-radius:20px;border:1.5px solid;text-transform:uppercase;}
+.prod-btn{display:block;text-align:center;padding:14px;border-radius:12px;font-size:var(--fs-body-sm);font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:opacity .2s;}
+.prod-btn:hover{opacity:.85;}
+
+/* ENZYME */
+.card-enzyme{background:linear-gradient(160deg,#E8F8F5,#FFFFFF);}
+.card-enzyme .prod-tag{background:rgba(0,124,140,.12);color:#007C8C;}
+.card-enzyme .prod-card-img{background:rgba(0,124,140,.06);border-color:rgba(0,124,140,.25);color:rgba(0,124,140,.5);}
+.card-enzyme .prod-name{color:#005F6E;}
+.card-enzyme .prod-sub{color:#007C8C;}
+.card-enzyme .prod-desc{color:var(--ink2);}
+.card-enzyme .prod-enzima-tag{background:rgba(0,124,140,.1);color:#007C8C;}
+.card-enzyme .prod-spec{background:rgba(0,124,140,.07);}
+.card-enzyme .prod-spec-k{color:#007C8C;}
+.card-enzyme .prod-spec-v{color:#005F6E;}
+.card-enzyme .prod-size{border-color:rgba(0,124,140,.4);color:#007C8C;}
+.card-enzyme .prod-btn{background:#007C8C;color:#fff;}
+
+/* CLEAN */
+.card-clean{background:linear-gradient(160deg,#F5EEF8,#FFFFFF);}
+.card-clean .prod-tag{background:rgba(107,36,132,.12);color:#6B2484;}
+.card-clean .prod-card-img{background:rgba(107,36,132,.06);border-color:rgba(107,36,132,.25);color:rgba(107,36,132,.5);}
+.card-clean .prod-name{color:#4A1860;}
+.card-clean .prod-sub{color:#6B2484;}
+.card-clean .prod-desc{color:var(--ink2);}
+.card-clean .prod-enzima-tag{background:rgba(107,36,132,.1);color:#6B2484;}
+.card-clean .prod-spec{background:rgba(107,36,132,.07);}
+.card-clean .prod-spec-k{color:#6B2484;}
+.card-clean .prod-spec-v{color:#4A1860;}
+.card-clean .prod-size{border-color:rgba(107,36,132,.4);color:#6B2484;}
+.card-clean .prod-btn{background:#6B2484;color:#fff;}
+
+/* ── DIFERENCIAIS / GATILHOS ────────────────────────────────────────────── */
+.diferenciais{background:var(--white);padding:96px 0;}
+.dif-header{text-align:center;margin-bottom:56px;}
+.dif-header h2{font-size:clamp(var(--fs-h1),4vw,var(--fs-display-lg));font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-top:12px;max-width:540px;margin-left:auto;margin-right:auto;}
+.dif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.dif-card{
+  background:var(--off);border:1px solid var(--line);border-radius:16px;
+  padding:28px 24px;transition:transform .2s,box-shadow .2s;
+}
+.dif-card:hover{transform:translateY(-4px);box-shadow:var(--sh);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.is-visible{opacity:1;transform:none;}
+.offer{background:var(--white);padding:96px 0;}
+.offer-header{text-align:center;max-width:650px;margin:0 auto 52px;}
+.offer-header h2{font-size:clamp(var(--fs-h2),3.2vw,var(--fs-display-md));font-weight:900;color:var(--ink);line-height:1.1;letter-spacing:-.02em;margin-top:12px;}
+.offer-header p{font-size:var(--fs-body-lg);color:var(--ink2);line-height:1.7;margin-top:14px;}
+.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;}
+.offer-card{position:relative;background:var(--green-lt);border:1px solid var(--green-lt);border-radius:20px;padding:30px 26px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;}
+.offer-card:hover{transform:translateY(-5px);box-shadow:var(--sh2);}
+.offer-card.featured{background:var(--green-dk);border-color:var(--green-lt);box-shadow:0 16px 48px rgba(76,135,81,.22);}
+.offer-badge{position:absolute;top:18px;right:18px;background:var(--orange);color:var(--white);padding:5px 10px;border-radius:30px;font-size:var(--fs-overline);font-weight:800;letter-spacing:.08em;text-transform:uppercase;}
+.offer-card h3{font-size:var(--fs-h3);font-weight:900;color:var(--ink);margin-bottom:8px;}
+.offer-card.featured h3{color:var(--white);}
+.offer-card p{font-size:var(--fs-body);color:var(--ink);line-height:1.7;margin-bottom:22px;}
+.offer-card.featured p{color:rgba(255,255,255,.68);}
+.offer-price{font-size:var(--fs-h3);font-weight:900;color:var(--green-mid);margin-bottom:20px;}
+.offer-card.featured .offer-price{color:var(--green-lt);}
+.offer-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:26px;flex:1;}
+.offer-list li{font-size:var(--fs-body-sm);color:var(--ink);line-height:1.5;padding-left:20px;position:relative;}
+.offer-card.featured .offer-list li{color:rgba(255,255,255,.72);}
+.offer-list li::before{content:'✓';position:absolute;left:0;color:var(--green-mid);font-weight:900;}
+.offer-card.featured .offer-list li::before{color:var(--green-lt);}
+.offer-btn{display:block;text-align:center;background:var(--green-mid);color:var(--white);padding:13px 16px;border-radius:12px;font-size:var(--fs-body-sm);font-weight:800;letter-spacing:.05em;text-transform:uppercase;transition:transform .2s,background .2s;}
+.offer-card.featured .offer-btn{background:var(--orange);}
+.offer-btn:hover{transform:scale(1.02);background:var(--green-lt);}
+.faq{background:var(--off);padding:96px 0;}
+.faq-list{display:flex;flex-direction:column;gap:10px;}
+.faq-item{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.faq-question{width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;background:none;border:0;padding:20px;text-align:left;font:700 14px var(--font);color:var(--ink);cursor:pointer;}
+.faq-answer{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease;}
+.faq-answer > div{overflow:hidden;}
+.faq-answer p{padding:0 20px 20px;font-size:var(--fs-body);color:var(--ink2);line-height:1.7;}
+.faq-item.open .faq-answer{grid-template-rows:1fr;}
+.dif-icon{
+  width:48px;height:48px;border-radius:12px;background:var(--green-dk);
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:var(--fs-h3);
+}
+/* [ÍCONE] Substituir emoji por SVG customizado ou ícone de biblioteca */
+.dif-title{font-size:var(--fs-h3);font-weight:800;color:var(--ink);margin-bottom:8px;}
+.dif-text{font-size:var(--fs-body);color:var(--ink2);line-height:1.7;}
+
+/* ── DISTRIBUIDORES + MAPA ──────────────────────────────────────────────── */
+.distribuidores{background:var(--off);padding:96px 0;}
+.distrib-header{text-align:center;margin-bottom:60px;}
+.distrib-header .sec-tag{color:var(--orange);}
+.distrib-header h2{font-size:clamp(var(--fs-h2),3vw,var(--fs-display-md));font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-top:12px;}
+.distrib-header p{font-size:var(--fs-body-lg);color:var(--ink2);margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;}
+.distrib-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:40px;align-items:start;}
+
+/* Lista de distribuidores */
+.distrib-list{display:flex;flex-direction:column;gap:10px;}
+.distrib-item{
+  background:var(--white);border:1px solid var(--line);border-radius:12px;
+  padding:14px 18px;display:flex;align-items:center;gap:14px;
+  transition:border-color .2s,transform .15s;cursor:pointer;
+}
+.distrib-item:hover{border-color:var(--green-lt);transform:translateX(4px);}
+.distrib-item.sede{border-color:var(--orange);background:rgba(232,98,10,.04);}
+.distrib-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.distrib-dot.verde{background:var(--green-lt);}
+.distrib-dot.laranja{background:var(--orange);}
+.distrib-info{flex:1;}
+.distrib-nome{font-size:var(--fs-body-sm);font-weight:700;color:var(--ink);}
+.distrib-cidade{font-size:var(--fs-caption);color:var(--ink3);margin-top:2px;}
+.distrib-rota{font-size:var(--fs-overline);font-weight:700;padding:3px 10px;border-radius:20px;background:var(--green-dk);color:var(--white);}
+
+/* Mapa embed */
+.mapa-wrapper{
+  border-radius:20px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:var(--sh);background:var(--line);position:relative;
+}
+.mapa-wrapper svg{width:100%;height:100%;display:block;}
+.mapa-wrapper .mapa-label{
+  position:absolute;top:14px;left:14px;background:rgba(0,85,48,.95);color:var(--white);
+  font-size:var(--fs-caption);font-weight:700;padding:8px 16px;border-radius:22px;
+  box-shadow:0 10px 28px rgba(0,0,0,.14);z-index:10;
+}
+/* iteração anterior do mapa (SVG estático com pinos cravados em xy fixo) —
+   removida junto com o loader que a preenchia; ver DISTRIBUIDORES · mapa 2D */
+
+/* Sede badge */
+.sede-card{
+  background:var(--green-dk);border-radius:16px;padding:20px 24px;margin-top:12px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.sede-card-icon{font-size:var(--fs-h3);flex-shrink:0;margin-top:2px;}
+.sede-card h4{font-size:var(--fs-body-sm);font-weight:800;color:var(--white);margin-bottom:6px;}
+.sede-card p{font-size:var(--fs-caption);color:rgba(255,255,255,.6);line-height:1.6;}
+
+/* ── SLOGAN CTA ─────────────────────────────────────────────────────────── */
+.slogan-cta{
+  background:var(--orange);padding:80px 0;text-align:center;position:relative;overflow:hidden;
+}
+.slogan-cta::before{
+  content:'"';font-size:320px;font-weight:900;color:rgba(255,255,255,.06);
+  position:absolute;top:-80px;left:50%;transform:translateX(-50%);line-height:1;pointer-events:none;
+}
+.slogan-cta-in{position:relative;z-index:1;}
+.slogan-cta h2{font-size:clamp(var(--fs-h1),4vw,var(--fs-display-lg));font-weight:900;color:var(--white);letter-spacing:-.02em;margin-bottom:12px;}
+.slogan-cta p{font-size:var(--fs-body-lg);color:rgba(255,255,255,.8);margin-bottom:36px;max-width:500px;margin-left:auto;margin-right:auto;}
+.btn-white{background:var(--white);color:var(--orange);font-size:var(--fs-body-sm);font-weight:800;padding:16px 36px;border-radius:30px;letter-spacing:.04em;text-transform:uppercase;display:inline-block;transition:transform .15s;}
+.btn-white:hover{transform:translateY(-2px);}
+
+/* ── RODAPÉ ─────────────────────────────────────────────────────────────── */
+footer{background:var(--ink);padding:60px 0 32px;color:rgba(255,255,255,.7);}
+.footer-in{max-width:1160px;margin:0 auto;padding:0 28px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-brand{}
+.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.footer-logo-mark{width:36px;height:36px;background:var(--green-lt);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:var(--fs-body);font-weight:900;color:var(--white);}
+.footer-logo-img{width:auto;height:36px;max-width:190px;object-fit:contain;}
+/* [LOGO RODAPÉ] Substituir .footer-logo-mark por <img src="logo.svg"> */
+.footer-logo-name{font-size:var(--fs-body-sm);font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:.04em;}
+.footer-slogan{font-size:var(--fs-body-sm);font-style:italic;color:var(--green-lt);margin-bottom:14px;}
+.footer-addr{font-size:var(--fs-caption);line-height:1.7;color:rgba(255,255,255,.5);}
+.footer-col h4{font-size:var(--fs-overline);font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.footer-col a{font-size:var(--fs-body-sm);color:rgba(255,255,255,.55);transition:color .2s;}
+.footer-col a:hover{color:var(--green-lt);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:var(--fs-caption);color:rgba(255,255,255,.35);}
+.footer-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.footer-tag{font-size:var(--fs-overline);font-weight:700;padding:4px 12px;border-radius:20px;background:rgba(58,183,149,.12);color:var(--green-lt);text-transform:uppercase;letter-spacing:.06em;}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .historia-grid,.distrib-layout{grid-template-columns:1fr;}
+  .numeros-grid{grid-template-columns:repeat(2,1fr);}
+  .produto-cards{grid-template-columns:1fr;}
+  .dif-grid{grid-template-columns:1fr 1fr;}
+  .offer-grid{grid-template-columns:1fr;max-width:560px;margin:0 auto;}
+  .cadastro-grid{grid-template-columns:1fr !important;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:560px){
+  .numeros-grid{grid-template-columns:1fr 1fr;}
+  .dif-grid{grid-template-columns:1fr;}
+  .historia-pilares{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+}
+
+/* ── CARESYSTEMNEW VISUAL LAYER ───────────────────────────────────────── */
+:root{
+  --page:#FFFFFF;
+  --surface:#FFFFFF;
+  --primary:var(--green-hero);
+  --secondary:#A8D156;
+  --accent:#A8D156;
+  --brand-text:#2E7370;
+  --surface-glass:rgba(255,255,255,.68);
+  --slate:var(--green-hero);
+  --slate-dark:#2E7370;
+  --sage:#A8D156;
+  --sage-dark:var(--green-hero);
+  --line-soft:rgba(46,115,112,.16);
+  --shadow-soft:0 18px 48px rgba(80,72,91,.08);
+  --shadow-hover:0 24px 60px rgba(80,72,91,.14);
+}
+html{scroll-padding-top:5rem;}
+body{background:var(--page);color:var(--slate);}
+body,p,a,button,input,select,h1,h2,h3,h4,h5,h6,.nav-brand,.footer-logo-name{font-family:var(--font);}
+h1,h2,h3{font-weight:400;letter-spacing:-.045em;line-height:1.02;}
+h2{color:var(--slate-dark);}
+section{margin:0 .75rem 1rem;border-radius:1.6rem;overflow:hidden;}
+.sec-in,.footer-in{max-width:1536px;}
+.video-sec,.numeros,.linhas,#cadastro{background:var(--primary);}
+.video-sec::before{z-index:0;}
+.video-sec .dotted-surface{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+.video-sec .dotted-surface canvas{width:100%;height:100%;display:block;}
+.video-sec .video-in{z-index:2;}
+.video-sec,.numeros,.linhas,#cadastro,.slogan-cta{box-shadow:var(--shadow-soft);}
+.video-wrapper{background:linear-gradient(135deg,rgba(95,109,79,.8),rgba(42,50,64,.9));border-color:rgba(255,255,255,.16);box-shadow:var(--shadow-soft);}
+.video-play-btn{background:var(--surface);box-shadow:0 0 0 16px rgba(255,255,255,.12);}
+.video-play-btn svg{fill:var(--sage-dark);}
+.historia,.produtos,.diferenciais,.distribuidores,.offer,.faq{background:var(--surface);}
+.historia,.produtos,.diferenciais,.distribuidores,.offer,.faq{box-shadow:var(--shadow-soft);}
+.historia-content h2,.produtos-header h2,.dif-header h2,.distrib-header h2,.offer-header h2{font-weight:400;color:var(--slate-dark);}
+.historia-content p,.prod-desc,.dif-text,.distrib-header p,.offer-header p{color:var(--slate);}
+.historia-img{background:linear-gradient(160deg,#e5e9e1,#c9d3c7);border:1px solid var(--line-soft);box-shadow:var(--shadow-soft);}
+.historia-badge{
+  background:rgba(11,61,46,.42);
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.26),0 8px 24px rgba(0,0,0,.22);
+}
+/* sem suporte a backdrop-filter o vidro nao existe: escurece para nao perder o texto */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .historia-badge{background:rgba(11,61,46,.82);}
+}
+.pilar,.dif-card,.offer-card,.faq-item,.distrib-item{background:var(--surface-glass);border-color:var(--line-soft);box-shadow:var(--shadow-soft);}
+.pilar{border-radius:10px;border:1px solid rgba(10,107,61,.34);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 0 0 3px rgba(10,107,61,.05),0 6px 18px rgba(10,107,61,.10);transition:border-color 220ms ease,box-shadow 220ms ease;}
+.pilar:hover{border-color:rgba(10,107,61,.62);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 0 0 4px rgba(10,107,61,.10),0 10px 26px rgba(10,107,61,.16);}
+.dif-card,.offer-card,.faq-item,.distrib-item{border-radius:1.4rem;}
+.dif-card{min-height:220px;transition:transform .3s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;}
+.dif-card:hover,.offer-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover);}
+.dif-icon{background:var(--green-hero);}
+.prod-card{border-radius:1.6rem;box-shadow:var(--shadow-soft);}
+.prod-card input,input,select{background:#F4F4F4;}
+.offer-card.featured .offer-btn,.prod-btn{background:var(--accent);color:#545454;}
+.btn-white{color:var(--accent);}
+.prod-card-img{border-radius:1.2rem;}
+.prod-card-img{height:500px;}
+.prod-card-img img{width:100%;height:100%;object-fit:contain;padding:8px;}
+.prod-btn,.offer-btn{border-radius:999px;}
+.slogan-cta h2{font-weight:400;}
+.slogan-cta{background:linear-gradient(135deg,var(--sage),var(--green-hero));border-radius:2.1rem;}
+.slogan-cta .btn-white{border-radius:999px;}
+.offer-card.featured{background:linear-gradient(145deg,var(--green-hero),var(--green-hero));border-color:rgba(255,255,255,.24);}
+.offer-card h3{font-weight:400;color:var(--slate-dark);}
+.faq{background:#F7F7F5;}
+.faq-question{font-weight:500;color:var(--slate-dark);}
+
+/* CTAs principais */
+.nav-cta,
+.btn-primary,
+.prod-btn,
+.offer-btn,
+.btn-white,
+.cta-button{
+  background:#A8D156!important;
+  color:#2E7370!important;
+  border:1px solid #A8D156!important;
+  box-shadow:none!important;
+  text-shadow:none;
+  font-family:var(--font)!important;
+  font-weight:800;
+  transition:background-color .2s ease,filter .2s ease!important;
+}
+.nav-cta,
+.btn-primary,
+.btn-ghost,
+.prod-btn,
+.offer-btn,
+.btn-white,
+.cta-button{
+  font-family:var(--font)!important;
+}
+.nav-cta:hover,
+.btn-primary:hover,
+.prod-btn:hover,
+.offer-btn:hover,
+.btn-white:hover,
+.cta-button:hover{
+  filter:saturate(1.12) brightness(1.05);
+}
+.nav-cta:active,
+.btn-primary:active,
+.prod-btn:active,
+.offer-btn:active,
+.btn-white:active,
+.cta-button:active{
+  filter:brightness(.96);
+}
+.nav-cta{box-shadow:none!important;}
+.cta-button{border-radius:999px!important;cursor:pointer;}
+.hero h1{text-shadow:0 4px 16px rgba(46,115,112,.32),0 1px 3px rgba(255,255,255,.55);}
+.hero h1 em{color:#2E7370;text-shadow:0 4px 14px rgba(46,115,112,.42);}
+.hero-left > p:first-child{color:#0B3D2E!important;}
+.hstat{border-left-color:#A8D156;}
+.hstat-v span{color:#A8D156;}
+.sec-tag{color:#A8D156!important;}
+.lamp-title-wrap .lamp-core{background:rgba(234,102,33,.42);}
+.lamp-title-wrap .lamp-line{background:rgba(234,102,33,.9);box-shadow:0 0 12px 2px rgba(234,102,33,.48);}
+.sede-card{background:var(--green-hero);border-radius:1.4rem;}
+footer{margin:0 .75rem;border-radius:1.6rem 1.6rem 0 0;background:#2E7370;}
+.footer-logo-mark{background:var(--sage);}
+.footer-slogan{color:#A8D156;}
+.footer-tag{background:rgba(168,209,86,.16);color:#A8D156;}
+.reveal{transform:translateY(44px) scale(.985);transition:opacity 750ms cubic-bezier(.2,.75,.25,1),transform 750ms cubic-bezier(.2,.75,.25,1);}
+@media(max-width:900px){
+  section{border-radius:1.5rem;}
+  .hero{border-radius:1.8rem;}
+  .hero-in{padding:72px 28px 56px;}
+  .hero-in #hf-step1 > div:first-child,.hero-in #hf-step2 > div:first-child{grid-template-columns:1fr;}
+  .hero-in #hf-step2 > div:first-child > div,.hero-in #hf-step2 > div:first-child > div > div{display:block;}
+  .nav-links{display:none;}
+}
+@media(max-width:560px){
+  section{margin-left:.75rem;margin-right:.75rem;border-radius:1.35rem;}
+  .hero{min-height:calc(100vh - 1.5rem);border-radius:1.5rem;}
+  footer{margin-left:.75rem;margin-right:.75rem;border-radius:1.35rem 1.35rem 0 0;}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important;}
+  .reveal{opacity:1;transform:none;}
+}
+.offer-card,.offer-card.featured{background:var(--green-dk)!important;border-color:var(--green-dk)!important;}
+.offer-card h3,.offer-card p,.offer-list li{color:rgba(255,255,255,.9)!important;}
+.offer-card .offer-price{color:var(--green-lt)!important;}
+.offer-card .offer-list li::before{color:var(--green-lt)!important;}
+.offer-card .offer-btn,.offer-card.featured .offer-btn{background:var(--green-lt)!important;color:var(--ink)!important;border-color:var(--green-lt)!important;}
+.dif-icon{display:none;}
+.prod-card-img{width:fit-content;height:500px;margin:24px auto;border:0;}
+.prod-card-img img{width:auto;height:100%;max-width:100%;padding:0;border:1px dashed currentColor;border-radius:14px;object-fit:contain;}
+.stats-marquee{background:var(--green-dk);border:1px solid rgba(117,214,156,.38);padding:0;}
+.stats-marquee-viewport{overflow:hidden;padding:20px 0;}
+.stats-marquee-track{display:flex;width:max-content;animation:stats-marquee-scroll 32s linear infinite;will-change:transform;}
+.stats-marquee-group{display:flex;align-items:center;flex-shrink:0;}
+.stats-marquee-item{display:flex;align-items:baseline;gap:12px;padding:0 54px;white-space:nowrap;}
+.stats-marquee-value{font-family:var(--font);font-size:clamp(var(--fs-h2),3vw,var(--fs-display-md));font-weight:800;line-height:1;color:var(--green-lt);}
+.stats-marquee-label{font-size:var(--fs-overline);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.82);}
+.stats-marquee-separator{width:5px;height:5px;border-radius:50%;background:var(--orange);flex:0 0 auto;}
+.stats-marquee:hover .stats-marquee-track{animation-play-state:paused;}
+@keyframes stats-marquee-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media(max-width:560px){
+  .stats-marquee-viewport{padding:16px 0;}
+  .stats-marquee-item{gap:8px;padding:0 30px;}
+  .stats-marquee-label{font-size:var(--fs-overline);}
+}
+
+/* ══════════ PARCEIROS · carrossel de logos ══════════════════════════
+   Mesma mecanica da stats-marquee acima: grupos identicos lado a lado,
+   translateX ate a fracao de 1 grupo, pausa no hover. A diferenca e o
+   foco por item: passar o mouse num logo especifico apaga os outros
+   (o viewport inteiro escurece) e realca so aquele. */
+.parceiros-marquee{background:var(--off);}
+.parceiros-marquee-header{text-align:center;margin-bottom:var(--space-12);}
+.parceiros-marquee-header .sec-tag{color:var(--orange);}
+.parceiros-marquee-header h2{font-size:clamp(var(--fs-h2),3vw,var(--fs-display-md));font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-top:12px;}
+
+.parceiros-marquee-viewport{
+  overflow:hidden;
+  position:relative;
+  width:100%;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);
+}
+.parceiros-marquee-track{
+  display:flex !important;
+  width:max-content !important;
+  -webkit-animation:parceiros-marquee-scroll 32s linear infinite !important;
+  animation:parceiros-marquee-scroll 32s linear infinite !important;
+  will-change:transform;
+}
+.parceiros-marquee-group{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+  gap:60px;
+  padding:0 30px;
+}
+.parceiros-marquee-item{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+}
+.parceiros-marquee-item img{
+  height:46px;
+  width:auto;
+  display:block;
+  opacity:.72;
+  transition:opacity 220ms ease-out,transform 220ms ease-out;
+}
+.parceiros-marquee-track:hover{
+  animation-play-state:paused;
+  -webkit-animation-play-state:paused;
+}
+.parceiros-marquee-track:hover .parceiros-marquee-item img{
+  opacity:.35;
+}
+.parceiros-marquee-item:hover img{
+  opacity:1 !important;
+  transform:scale(1.18);
+}
+@-webkit-keyframes parceiros-marquee-scroll{
+  from{ -webkit-transform:translate3d(0,0,0); transform:translate3d(0,0,0); }
+  to{ -webkit-transform:translate3d(-33.333333%,0,0); transform:translate3d(-33.333333%,0,0); }
+}
+@keyframes parceiros-marquee-scroll{
+  from{ -webkit-transform:translate3d(0,0,0); transform:translate3d(0,0,0); }
+  to{ -webkit-transform:translate3d(-33.333333%,0,0); transform:translate3d(-33.333333%,0,0); }
+}
+
+@media(max-width:560px){
+  .parceiros-marquee-item img{height:34px;}
+  .parceiros-marquee-group{gap:36px;padding:0 18px;}
+}
+
+/* ══════════ HERO CARE SYSTEMS (bloco isolado, prefixo .cs-) ══════════ */
+@keyframes csFadeUp      { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@keyframes csFadeIn      { from { opacity:0; } to { opacity:1; } }
+@keyframes csSlideInLeft { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+@keyframes csSlideInRight{ from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+@keyframes csStepIn      { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:translateX(0); } }
+@keyframes csWordReveal  { from { opacity:0; transform:translateY(100%); filter:blur(4px); } to { opacity:1; transform:translateY(0); filter:blur(0px); } }
+
+.cs-hero{--cs-orange:#E8622A;--cs-green-mid:#005530;}
+.cs-hero,.cs-hero *{box-sizing:border-box;}
+.cs-hero [hidden]{display:none!important;}
+.cs-hero{position:relative;min-height:calc(100vh - 24px);display:flex;flex-direction:column;overflow:hidden;background:#0B3D2E;font-family:Mulish,sans-serif;font-size:var(--fs-body);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;margin:12px;border-radius:24px;}
+.cs-hero a{color:#6cb33f;text-decoration:none;transition:color 120ms cubic-bezier(.4,0,.2,1);}
+.cs-hero a:hover{color:#8fc85e;text-decoration:underline;}
+.cs-hero-top{position:relative;flex:1;display:flex;flex-direction:column;min-height:0;}
+
+/* fundo (desktop) */
+.cs-hero-bg{position:absolute;top:0;bottom:0;right:0;z-index:1;width:min(56%,900px);animation:csFadeIn .9s cubic-bezier(.16,1,.3,1) .2s both;}
+
+/* nav */
+.cs-nav{position:relative;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(16px,2vw,22px) clamp(20px,3vw,40px);animation:csFadeIn .7s cubic-bezier(.16,1,.3,1) both;background:none;border:0;border-radius:0;box-shadow:none;top:auto;left:auto;right:auto;width:auto;transform:none;backdrop-filter:none;}
+.cs-nav-logo{display:flex;align-items:center;animation:csSlideInLeft .8s cubic-bezier(.16,1,.3,1) .2s both;}
+.cs-logo-img{height:32px;width:auto;max-width:none;object-fit:contain;display:block;}
+.cs-nav-links{display:flex;align-items:center;gap:clamp(20px,2.6vw,40px);animation:csFadeIn .7s cubic-bezier(.16,1,.3,1) .4s both;}
+.cs-hero .cs-nav-link{font-family:Poppins,sans-serif;font-weight:500;font-size:clamp(var(--fs-body-sm),1.1vw,var(--fs-body-lg));color:rgba(255,255,255,.9);letter-spacing:-.01em;text-transform:none;}
+.cs-hero .cs-nav-link:hover{color:#fff;}
+.cs-nav-right{display:flex;align-items:center;gap:clamp(14px,1.4vw,22px);animation:csSlideInRight .8s cubic-bezier(.16,1,.3,1) .3s both;}
+/* CTA 3D: pill laranja com aro, gradiente, brilho no topo e sombra */
+.cs-hero .cs-nav-manual{position:relative;display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 26px;border-radius:999px;font-family:Mulish,sans-serif;font-weight:700;font-size:var(--fs-overline);line-height:1;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;margin-bottom:0;}
+
+.cs-cta-label{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;}
+.cs-hero .cs-nav-manual:hover{text-decoration:none;}
+
+@media(prefers-reduced-motion:reduce){
+  .cs-hero .cs-nav-manual{transition:none;}
+}
+.cs-burger{background:none;border:0;padding:0;cursor:pointer;color:#fff;display:flex;}
+
+/* menu mobile */
+.cs-menu{position:fixed;inset:0;z-index:40;background:rgba(0,20,11,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;animation:csFadeIn .3s ease both;}
+.cs-menu-close{position:absolute;top:24px;right:24px;background:none;border:0;color:#fff;cursor:pointer;display:flex;}
+.cs-hero .cs-menu-link{font-family:Poppins,sans-serif;font-weight:500;font-size:var(--fs-h3);color:#fff;}
+.cs-hero .cs-menu-link:hover{color:#fff;}
+
+/* coluna de texto */
+.cs-textcol{position:relative;z-index:10;flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,6vh,80px) clamp(20px,3vw,40px);max-width:100%;margin:0;border-radius:0;overflow:visible;background:none;box-shadow:none;}
+.cs-eyebrow{font-family:Mulish,sans-serif;font-weight:600;font-size:var(--fs-overline);letter-spacing:.24em;text-transform:uppercase;color:#8fc85e;margin-bottom:clamp(14px,2vh,24px);animation:csFadeIn .7s cubic-bezier(.16,1,.3,1) .25s both;}
+.cs-h1{margin:0;font-family:Poppins,sans-serif;font-weight:400;letter-spacing:-.05em;font-size:clamp(var(--fs-display-md),5.4vw,var(--fs-display-xl));line-height:.94;color:#fff;text-shadow:0 2px 24px rgba(11,61,46,.6);}
+.cs-textcol-body{display:flex;flex-direction:column;gap:24px;margin-top:clamp(26px,4.5vh,60px);animation:csFadeUp .8s cubic-bezier(.16,1,.3,1) .6s both;}
+.cs-lead{margin:0;max-width:440px;color:#fff;font-family:Mulish,sans-serif;font-weight:400;font-size:clamp(var(--fs-body-sm),1.1vw,var(--fs-body-lg));line-height:1.45;letter-spacing:-.01em;text-wrap:pretty;}
+
+/* card do formulário */
+.cs-formcard{width:100%;max-width:560px;flex:none;background:#FFFFFF;border-radius:20px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.28);}
+.cs-card-head{position:relative;height:48px;display:flex;align-items:center;padding-left:24px;background:var(--cs-green-mid);font-family:Mulish,sans-serif;font-weight:600;font-size:var(--fs-overline);line-height:1;letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF;}
+.cs-prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.25);}
+.cs-prog-fill{display:block;height:100%;width:20%;background:var(--cs-orange);transition:width 260ms cubic-bezier(.16,1,.3,1);}
+.cs-card-body{padding:24px;}
+.cs-etapa{font-family:Mulish,sans-serif;font-weight:600;font-size:var(--fs-overline);line-height:1.4;letter-spacing:.1em;text-transform:uppercase;color:var(--cs-orange);}
+.cs-steptitle{font-family:Mulish,sans-serif;font-weight:600;font-size:var(--fs-h4);line-height:1.3;color:#0B3D2E;margin-top:4px;margin-bottom:16px;}
+.cs-row{display:flex;flex-direction:column;gap:12px;}
+.cs-fld{display:flex;flex-direction:column;flex:1 1 0;min-width:0;margin:0;}
+.cs-selwrap{position:relative;display:flex;align-items:center;width:100%;}
+.cs-chev{position:absolute;right:14px;pointer-events:none;}
+.cs-hero .cs-in{width:100%;min-width:0;height:48px;padding:0 14px;border-radius:10px;background:#F4F6F4;border:1px solid #E2E6E2;outline:none;color:#0B3D2E;font-family:Mulish,sans-serif;font-weight:400;font-size:var(--fs-body-sm);line-height:1.2;transition:border-color 160ms ease,background 160ms ease;}
+.cs-hero .cs-in::placeholder{color:#9AA39A;}
+.cs-hero .cs-in:focus{border:1.5px solid var(--cs-orange);background:#FFFFFF;outline:none;}
+.cs-hero .cs-sel{appearance:none;-webkit-appearance:none;color-scheme:light;cursor:pointer;padding-right:38px;text-overflow:ellipsis;}
+.cs-hero .cs-in.is-err{border-color:#D64545;}
+.cs-hero .cs-in.is-err:focus{border-color:#D64545;}
+.cs-fld-err{display:none;font-family:Mulish,sans-serif;font-size:var(--fs-caption);line-height:1.35;color:#D64545;margin-top:6px;}
+.cs-fld-err.is-on{display:block;}
+.cs-hero .cs-submit{display:block;width:100%;height:52px;margin-top:20px;margin-bottom:4px;padding:0 16px;border:none;border-radius:10px;cursor:pointer;background:linear-gradient(180deg,#C75209 0%,#AF4113 52%,#9D3B13 100%);color:#FFFFFF;font-family:Mulish,sans-serif;font-weight:600;font-size:var(--fs-body-sm);line-height:1;letter-spacing:.02em;text-transform:uppercase;box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(120,40,0,.22),0 4px 0 #84320B,0 7px 14px rgba(132,50,11,.34);transition:transform 90ms ease,box-shadow 90ms ease,filter 160ms ease;}
+.cs-hero .cs-submit:hover{filter:brightness(1.05);}
+.cs-hero .cs-submit:active{transform:translateY(4px);box-shadow:inset 0 2px 6px rgba(120,40,0,.42),inset 0 -1px 0 rgba(255,255,255,.12),0 0 0 #84320B,0 1px 3px rgba(132,50,11,.3);}
+@media(prefers-reduced-motion:reduce){
+  .cs-hero .cs-submit{transition:none;}
+}
+.cs-card-foot{display:flex;align-items:center;min-height:0;}
+.cs-hero .cs-back{font-family:Mulish,sans-serif;font-size:var(--fs-caption);color:#6B7280;text-decoration:none;margin-top:14px;}
+.cs-hero .cs-back:hover{color:#0B3D2E;text-decoration:none;}
+.cs-hero .cs-privacy{margin:14px 0 0;font-family:Mulish,sans-serif;font-size:var(--fs-caption);line-height:1.4;color:#9AA39A;text-align:center;}
+.cs-hero .cs-submit-err{display:none;margin:12px 0 0;font-family:Mulish,sans-serif;font-size:var(--fs-caption);line-height:1.4;color:#D64545;text-align:center;}
+.cs-hero .cs-submit-err.is-on{display:block;}
+.cs-hero .cs-submit[disabled]{opacity:.7;cursor:wait;}
+/* sucesso */
+.cs-done{text-align:center;padding:36px 24px 40px;}
+.cs-done-ico{width:56px;height:56px;margin:0 auto 18px;border-radius:50%;background:var(--cs-green-mid);display:flex;align-items:center;justify-content:center;}
+.cs-done-title{font-family:Mulish,sans-serif;font-weight:600;font-size:var(--fs-h4);line-height:1.3;color:#0B3D2E;}
+.cs-done-txt{margin:8px 0 0;font-family:Mulish,sans-serif;font-size:var(--fs-body-sm);line-height:1.5;color:#6B7280;}
+
+/* imagem mobile */
+.cs-hero-mobileimg{position:relative;z-index:10;height:340px;flex:none;animation:csFadeIn .9s cubic-bezier(.16,1,.3,1) .4s both;}
+
+
+/* ── breakpoint 768px (wide) ── */
+.cs-hero .cs-only-wide{display:none;}
+@media(min-width:768px){
+  .cs-hero{margin:16px 24px;border-radius:32px;min-height:calc(100vh - 32px);}
+  .cs-hero .cs-only-narrow{display:none;}
+  .cs-hero .cs-hero-bg.cs-only-wide{display:block;}
+  .cs-hero .cs-nav-links.cs-only-wide{display:flex;}
+  .cs-hero .cs-nav-manual.cs-only-wide{display:inline-flex;}
+  .cs-hero .cs-fgroup.cs-only-wide{display:contents;}
+  .cs-logo-img{height:40px;}
+  .cs-textcol{max-width:min(700px,52%);}
+  .cs-row{flex-direction:row;}
+}
+
+/* ── CTAs primários: mesmo tratamento do botão do formulário da hero ───── */
+/* seletores espelham a especificidade das regras !important existentes    */
+.prod-btn,.offer-card .offer-btn,.offer-card.featured .offer-btn,.cta-button,.cs-hero .cs-nav-manual,.linhas .dm-cta{
+  background:linear-gradient(180deg,#C75209 0%,#AF4113 52%,#9D3B13 100%)!important;
+  color:#FFFFFF!important;border:none!important;margin-bottom:4px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(120,40,0,.22),0 4px 0 #84320B,0 7px 14px rgba(132,50,11,.34)!important;
+  transition:transform 90ms ease,box-shadow 90ms ease,filter 160ms ease!important;
+}
+.prod-btn:hover,.offer-card .offer-btn:hover,.offer-card.featured .offer-btn:hover,.cta-button:hover,.cs-hero .cs-nav-manual:hover,.linhas .dm-cta:hover{
+  filter:brightness(1.05);opacity:1;transform:none;
+}
+.prod-btn:active,.offer-card .offer-btn:active,.offer-card.featured .offer-btn:active,.cta-button:active,.cs-hero .cs-nav-manual:active,.linhas .dm-cta:active{
+  transform:translateY(4px);filter:none;
+  box-shadow:inset 0 2px 6px rgba(120,40,0,.42),inset 0 -1px 0 rgba(255,255,255,.12),0 0 0 #84320B,0 1px 3px rgba(132,50,11,.3)!important;
+}
+.cs-hero .cs-nav-manual{margin-bottom:0;}
+@media(prefers-reduced-motion:reduce){
+  .prod-btn,.offer-card .offer-btn,.cta-button,.cs-hero .cs-nav-manual,.linhas .dm-cta{transition:none;}
+}
+
+/* ── LINHA DENTAL MED · DESTAQUE ──────────────────────────────────────── */
+.pm{position:relative;isolation:isolate;padding:64px 0;background:#F7FAFB;}
+.pm-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0;pointer-events:none;}
+.pm-in{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 24px;}
+.pm-title{max-width:620px;margin:0 auto 48px;text-align:center;font-size:clamp(var(--fs-h2),3.4vw,var(--fs-display-md));font-weight:700;line-height:1.25;color:#1B2A4A;letter-spacing:-.01em;}
+.pm-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:stretch;}
+
+.pm-card{position:relative;display:flex;flex-direction:column;background:#FFFFFF;border-radius:16px;border:1px solid rgba(0,0,0,.06);box-shadow:0 8px 28px rgba(0,0,0,.06);overflow:visible;}
+.pm-card--enzyme{--pm:#2E9B8A;--pm-soft:#E8F5F2;}
+.pm-card--clean{--pm:#7B5EA7;--pm-soft:#F0EBF7;}
+
+.pm-strip{height:32px;flex:none;display:flex;align-items:center;padding:0 20px;background:var(--pm-soft);font-size:var(--fs-overline);font-weight:700;line-height:1;letter-spacing:.1em;text-transform:uppercase;color:var(--pm);}
+
+.pm-body{display:flex;flex:1;min-height:0;}
+.pm-media{flex:0 0 45%;max-width:45%;display:flex;align-items:stretch;justify-content:center;padding:0;overflow:hidden;}
+.pm-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;cursor:zoom-in;transition:transform 300ms cubic-bezier(.16,1,.3,1);}
+.pm-media img:hover{transform:scale(1.03);}
+.pm-media img:focus-visible{outline:2px solid var(--pm);outline-offset:-2px;}
+
+/* lightbox da foto do produto */
+.pm-lb{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:32px;background:rgba(8,20,16,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:csFadeIn 180ms ease both;}
+.pm-lb img{max-width:min(92vw,900px);max-height:90vh;width:auto;height:auto;object-fit:contain;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.5);display:block;}
+.pm-lb-x{position:absolute;top:20px;right:20px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:0;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.12);color:#fff;}
+.pm-lb-x:hover{background:rgba(255,255,255,.24);}
+@media(prefers-reduced-motion:reduce){
+  .pm-media img{transition:none;}
+  .pm-lb{animation:none;}
+}
+.pm-content{flex:1 1 55%;min-width:0;padding:24px;display:flex;flex-direction:column;}
+
+.pm-name{font-size:var(--fs-h3);font-weight:700;line-height:1.15;color:var(--pm);letter-spacing:-.01em;}
+.pm-kicker{margin-top:6px;font-size:var(--fs-overline);font-weight:600;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:#6B7280;min-height:2.8em;}
+.pm-desc{margin-top:12px;font-size:var(--fs-body);line-height:1.5;color:#4B5563;}
+
+.pm-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+.pm-tag{font-size:var(--fs-caption);font-weight:600;line-height:1;letter-spacing:.04em;text-transform:uppercase;padding:6px 9px;border-radius:4px;background:var(--pm-soft);color:var(--pm);}
+
+.pm-specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+.pm-spec{display:flex;align-items:center;gap:9px;border:1px solid var(--pm-soft);border-radius:8px;padding:10px;}
+.pm-spec-ico{flex:none;width:16px;height:16px;color:var(--pm);}
+.pm-spec-k{font-size:var(--fs-overline);font-weight:700;line-height:1.2;letter-spacing:.08em;text-transform:uppercase;color:#9CA3AF;}
+.pm-spec-v{font-size:var(--fs-body-sm);font-weight:700;line-height:1.2;color:#1F2937;margin-top:2px;}
+
+.pm-btn{display:flex;align-items:center;justify-content:center;width:100%;height:44px;border:1.5px solid var(--pm);border-radius:22px;background:transparent;color:var(--pm);font-size:var(--fs-body-sm);font-weight:700;line-height:1;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:background 200ms ease,color 200ms ease;}
+.pm-btn-wrap{margin-top:auto;padding-top:20px;}
+.pm-btn:hover{background:var(--pm);color:#FFFFFF;text-decoration:none;}
+
+@media(max-width:900px){
+  .pm-grid{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  .pm-body{flex-direction:column;}
+  .pm-media{flex:none;max-width:none;width:100%;height:340px;}
+  .pm-specs{grid-template-columns:1fr;}
+}
+
+/* ── POR QUE CARE SYSTEMS · cards de vidro ───────────────────────────── */
+.diferenciais{
+  padding:96px 0;
+  background-color:#F3F4F6;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(229,231,235,.55) 10%, transparent 22%),
+    radial-gradient(circle at 85% 80%, rgba(229,231,235,.55) 15%, transparent 26%),
+    radial-gradient(circle at 50% 50%, rgba(16,185,129,.07) 20%, transparent 32%);
+}
+.diferenciais .sec-tag{color:#10b981!important;font-size:var(--fs-overline);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;}
+.dif-header{text-align:center;margin-bottom:64px;}
+.dif-header h2{font-size:clamp(var(--fs-h1),4vw,var(--fs-display-lg));font-weight:800;color:#0f766e;line-height:1.15;letter-spacing:-.01em;max-width:672px;margin:0 auto;}
+.dif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:start;}
+
+.dif-card{
+  position:relative;display:flex;flex-direction:column;min-height:0;
+  padding:32px;border-radius:16px;
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:0 4px 6px rgba(0,0,0,.05);
+  transition:transform .3s ease,box-shadow .3s ease,background .3s ease;
+}
+.dif-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 10px 25px rgba(0,0,0,.1);background:rgba(255,255,255,.9);z-index:10;}
+.dif-card--destaque{background:rgba(255,255,255,.9);box-shadow:0 20px 40px rgba(0,0,0,.08);z-index:1;}
+
+/* isolation cria contexto proprio: sem isso o glow (z-index:-1) cairia atras do card */
+.dif-icon{
+  display:inline-flex;align-items:center;justify-content:center;isolation:isolate;
+  position:relative;width:48px;height:48px;margin-bottom:16px;
+  background:none;border-radius:0;color:#10b981;
+}
+.dif-icon::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.3) 0%,transparent 70%);z-index:-1;}
+.dif-icon svg{width:40px;height:40px;display:block;}
+
+.dif-title{font-size:var(--fs-h3);font-weight:700;line-height:1.3;color:#0f766e;margin-bottom:12px;}
+.dif-text{font-size:var(--fs-body);line-height:1.65;color:#374151;flex-grow:1;}
+
+@media(min-width:1024px){
+  .dif-card--destaque{margin-top:-16px;margin-bottom:16px;}
+}
+@media(max-width:1023px){
+  .dif-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:640px){
+  .dif-grid{grid-template-columns:1fr;gap:20px;}
+  .dif-card{padding:24px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .dif-card{transition:none;}
+  .dif-card:hover{transform:none;}
+}
+
+/* ── LINHA DENTAL MED (#linhas) · reconstrucao ──────────────────────────── */
+.linhas{background:var(--green-hero);padding:96px 0;position:relative;overflow:hidden;}
+/* padrao hexagonal em overlay, stroke no verde de acento da brand */
+.linhas::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpolygon points='30,2 56,16 56,44 30,58 4,44 4,16' fill='none' stroke='%23A8D156' stroke-width='0.6' opacity='0.14'/%3E%3C/svg%3E");
+  background-size:60px 52px;
+}
+.linhas .sec-in{position:relative;z-index:1;}
+.linhas-header{text-align:center;margin-bottom:48px;}
+.linhas-header h2{
+  font-size:clamp(var(--fs-h2),3.2vw,var(--fs-display-md));font-weight:800;color:var(--white);
+  line-height:1.2;letter-spacing:-.02em;max-width:640px;margin:0 auto;
+}
+
+.dm-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:stretch;}
+
+.dm-card{
+  --dm-acc:#2E9B8A;--dm-kicker:#268475;
+  display:flex;flex-direction:column;overflow:hidden;
+  background:#FFFFFF;border-radius:16px;
+  border-left:5px solid var(--dm-acc);
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+}
+.dm-card--enzyme{--dm-acc:#2E9B8A;--dm-kicker:#268475;}
+.dm-card--clean {--dm-acc:#7B5EA7;--dm-kicker:#7B5EA7;}
+
+/* a imagem nao arredonda sozinha: quem corta e o overflow:hidden do card */
+.dm-media{aspect-ratio:1448/1086;background:#F3F4F6;}
+.dm-media img{width:100%;height:100%;object-fit:cover;}
+
+.dm-body{padding:24px;display:flex;flex-direction:column;flex:1;}
+/* o texto escurece para fechar AA; a faixa lateral fica em --dm-acc, pareada com o rotulo */
+.dm-kicker{font-size:var(--fs-overline);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--dm-kicker);}
+
+/* gap:1px sobre fundo cinza desenha os divisores — sem borda em celula alguma,
+   entao nao ha linha dupla nem sobra nas extremidades */
+.dm-specs{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  margin-top:20px;border-top:1px solid #E5E7EB;background:#E5E7EB;
+}
+.dm-spec{background:#FFFFFF;padding:12px;font-size:var(--fs-body-sm);line-height:1.45;color:#374151;}
+
+/* cor/sombra/estados do CTA vem do grupo laranja compartilhado */
+.dm-cta-wrap{text-align:center;margin-top:40px;}
+.dm-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:52px;padding:0 34px;border-radius:999px;
+  font-size:var(--fs-body-sm);font-weight:800;letter-spacing:.01em;
+}
+
+@media(max-width:768px){
+  .linhas{padding:72px 0;}
+  .dm-grid{grid-template-columns:1fr;gap:24px;}
+  /* a celula das enzimas e ~3x mais longa que as outras: em coluna de 125px
+     ela empilha 9 linhas. Ocupando a faixa inteira volta para ~4.
+     a ultima celula acompanha: com 3 celulas em 2 colunas sobraria um vao,
+     e o vao mostra o #E5E7EB do fundo que desenha os divisores */
+  .dm-spec--enzimas,.dm-specs .dm-spec:last-child{grid-column:1/-1;}
+}
+
+/* ── FOOTER · credito de desenvolvimento ────────────────────────────────── */
+.footer-dev{display:flex;align-items:center;gap:10px;margin-top:20px;}
+.footer-dev-label{font-size:var(--fs-caption);color:rgba(255,255,255,.55);}
+.footer-dev-logo{width:40px;height:40px;display:block;}
+
+/* ══════════ DESIGN SYSTEM · hierarquia tipografica ══════════════════════ */
+/* vem por ultimo no <style>: vence por ordem, sem inflar especificidade */
+
+/* H2 de secao */
+.video-in h2,.historia-content h2,.produtos-header h2,.offer-header h2,
+.distrib-header h2,.linhas-header h2,.pm-title,
+.dif-header h2,.slogan-cta h2{
+  font-family:var(--font-display);font-weight:var(--fw-bold);
+  line-height:var(--lh-heading);letter-spacing:var(--ls-tight);
+}
+
+/* subtitulo de apoio abaixo do H2 */
+.video-in p,.historia-content p,.offer-header p,.faq-sub,
+.distrib-header p,.slogan-cta p,.cs-lead{
+  font-family:var(--font-body);line-height:var(--lh-body);
+}
+
+/* titulo de card */
+.prod-name,.pm-name,.dif-title,.offer-card h3,.offer-price,
+.cs-steptitle,.cs-done-title{
+  font-family:var(--font-display);font-weight:var(--fw-semibold);
+}
+
+/* corpo de texto */
+.prod-desc,.pm-desc,.dif-text,.offer-card p,.faq-answer p{
+  font-family:var(--font-body);line-height:var(--lh-body);
+}
+
+/* kicker de SECAO — cor unificada no lime dos tokens */
+.sec-tag,.diferenciais .sec-tag{
+  font-family:var(--font-body);font-weight:var(--fw-extrabold);
+  letter-spacing:var(--ls-overline);text-transform:uppercase;
+  color:var(--lime-700)!important;
+  margin-bottom:var(--space-3);
+}
+/* sobre o verde escuro o lime-700 cai para 2.42:1 e o 500 para em 4.33:1 (abaixo de AA); o 400 fecha em 5.65:1 */
+.video-sec .sec-tag,#cadastro .sec-tag{color:var(--lime-400)!important;}
+/* kicker DENTRO do card: mesma metrica, cor do produto preservada */
+.dm-kicker{
+  font-family:var(--font-body);font-weight:var(--fw-extrabold);
+  letter-spacing:var(--ls-overline);text-transform:uppercase;
+}
+
+/* ══════════ DESIGN SYSTEM · ritmo vertical ══════════════════════════════ */
+
+/* --section-y nas 12 secoes; #home e .stats-marquee ficam de fora de
+   proposito: a hero e um card com padding proprio e a marquee e uma faixa.
+   .parceiros-marquee tem cabecalho (kicker+h2), por isso entra aqui —
+   a stats-marquee nao tem e fica de fora */
+.video-sec,.historia,.numeros,.pm,.linhas,.offer,.diferenciais,
+.parceiros-marquee,.distribuidores,.faq,#cadastro{
+  padding-top:var(--section-y);padding-bottom:var(--section-y);
+}
+
+/* largura de conteudo */
+.sec-in,.pm-in{max-width:var(--container-wide);padding-left:var(--gutter);padding-right:var(--gutter);}
+.video-in{max-width:var(--container-content);padding-left:var(--gutter);padding-right:var(--gutter);}
+
+/* cabecalho -> conteudo */
+.produtos-header,.dif-header,.offer-header,.distrib-header,.linhas-header{
+  margin-bottom:var(--space-12);
+}
+/* H2 -> subtitulo */
+.offer-header h2,.distrib-header h2,.historia-content h2{
+  margin-bottom:var(--space-4);
+}
+
+/* gap entre cards de um grid */
+.produto-cards,.dif-grid,.offer-grid,.pm-grid,.dm-grid,.footer-grid{gap:var(--space-8);}
+/* grids de layout (nao-cards) e listas internas */
+.historia-grid{gap:var(--space-16);}
+.distrib-layout{gap:var(--space-10);}
+.historia-pilares,.pm-specs{gap:var(--space-3);}
+.prod-specs{gap:var(--space-2);}
+
+/* padding interno de card */
+.dif-card,.dm-body,.offer-card,.pm-content{padding:var(--space-6);}
+
+@media(max-width:768px){
+  :root{--section-y:var(--space-16);}
+  .dm-grid{gap:var(--space-6);}
+}
+
+/* ══════════ DESIGN SYSTEM · classes vindas de style= inline ═══════════ */
+.cad-label{display:block;font-family:var(--font-body);font-size:var(--fs-overline);font-weight:var(--fw-bold);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--ink2);margin-bottom:var(--space-2);}
+.cad-input{width:100%;font-family:var(--font-body);font-size:var(--fs-body-sm);padding:var(--space-3) var(--space-4);border:1.5px solid var(--line);border-radius:10px;color:var(--ink);outline:none;transition:border-color .2s;}
+.cad-select{width:100%;font-family:var(--font-body);font-size:var(--fs-body-sm);padding:var(--space-3) var(--space-4);border:1.5px solid var(--line);border-radius:10px;color:var(--ink);outline:none;background:#fff;transition:border-color .2s;}
+.cad-select--mb{margin-bottom:var(--space-4);}
+.cad-bullet{display:flex;align-items:center;gap:var(--space-3);}
+.cad-bullet-ico{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:32px;height:32px;border-radius:50%;background:rgba(58,183,149,.2);font-size:var(--fs-body-sm);color:var(--green-lt);}
+.cad-bullet-txt{font-size:var(--fs-caption);color:rgba(255,255,255,.75);}
+.cad-fields{display:flex;flex-direction:column;gap:var(--space-4);}
+.cad-bullets{display:flex;flex-direction:column;gap:var(--space-3);}
+.cad-grid-in{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:center;}
+.cad-row{display:grid;grid-template-columns:2fr 1fr;gap:var(--space-3);}
+.cad-actions{display:flex;gap:var(--space-3);margin-top:var(--space-5);}
+.cad-actions--flush{margin-top:0;}
+.cad-title{font-family:var(--font-display);font-size:clamp(var(--fs-h1),3.5vw,var(--fs-display-lg));font-weight:var(--fw-bold);color:var(--white);line-height:var(--lh-heading);letter-spacing:var(--ls-tight);margin-bottom:var(--space-4);}
+.cad-lead{font-family:var(--font-body);font-size:var(--fs-body-lg);color:rgba(255,255,255,.65);line-height:var(--lh-relaxed);margin-bottom:var(--space-8);}
+.cad-form{padding:var(--space-8);}
+.cad-step-tag{font-family:var(--font-body);font-size:var(--fs-overline);font-weight:var(--fw-bold);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--green-mid);margin-bottom:var(--space-2);}
+.cad-step-title{font-family:var(--font-display);font-size:var(--fs-h4);font-weight:var(--fw-semibold);color:var(--ink);margin-bottom:var(--space-6);}
+.cad-btn{font-family:var(--font-body);font-size:var(--fs-body-sm);font-weight:var(--fw-extrabold);letter-spacing:var(--ls-wide);text-transform:uppercase;padding:var(--space-4);border:none;border-radius:12px;cursor:pointer;background:var(--green-mid);color:#fff;transition:background .2s;}
+.cad-btn--full{width:100%;margin-top:var(--space-5);}
+.cad-btn--grow{flex:1;}
+.cad-btn--orange{background:var(--orange);}
+.cad-btn-back{flex:0 0 auto;font-family:var(--font-body);font-size:var(--fs-body-sm);font-weight:var(--fw-bold);padding:var(--space-4) var(--space-5);background:var(--off);color:var(--ink2);border:1.5px solid var(--line);border-radius:12px;cursor:pointer;transition:all .2s;}
+.cad-resumo{background:var(--off);border-radius:12px;padding:var(--space-5);margin-bottom:var(--space-5);}
+.cad-resumo-tag{font-family:var(--font-body);font-size:var(--fs-overline);font-weight:var(--fw-bold);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--green-mid);margin-bottom:var(--space-3);}
+.cad-resumo-txt{font-size:var(--fs-caption);color:var(--ink2);line-height:var(--lh-relaxed);}
+.cad-done{display:none;text-align:center;padding:var(--space-5) 0;}
+.cad-done-ico{font-size:var(--fs-display-lg);margin-bottom:var(--space-4);}
+.cad-done-title{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:var(--fw-semibold);color:var(--green-mid);margin-bottom:var(--space-2);}
+.cad-done-txt{font-size:var(--fs-body-sm);color:var(--ink2);line-height:var(--lh-body);}
+.cad-done-sub{font-size:var(--fs-caption);color:var(--ink3);margin-top:var(--space-3);}
+.cad-privacy{font-size:var(--fs-caption);color:var(--ink3);text-align:center;margin-top:var(--space-4);}
+.cad-submit-err{font-size:var(--fs-caption);color:#D64545;text-align:center;margin-top:var(--space-3);}
+.hist-meta{font-family:var(--font-body);font-size:var(--fs-overline);font-weight:var(--fw-semibold);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--ink3);}
+.sede-card--mt{margin-top:var(--space-5);}
+
+.footer-mail{display:block;margin-top:var(--space-2);color:var(--green-lt);}
+.footer-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green-lt);margin-right:var(--space-1);vertical-align:1px;}
+
+/* subtitulo de card (nao e kicker de secao): metrica de overline, cor neutra */
+.pm-kicker{font-family:var(--font-body);font-weight:var(--fw-semibold);letter-spacing:var(--ls-overline);text-transform:uppercase;color:#6B7280;}
+
+/* ── POR QUE CARE SYSTEMS · hover no verde da brand ─────────────────────── */
+/* .dif-card--destaque tem fundo proprio; o seletor duplo iguala a especificidade
+   dele (0,2,0) para o hover valer tambem no card em destaque */
+.dif-card:hover,.dif-card.dif-card--destaque:hover{
+  background:var(--green-hero);
+  border-color:rgba(255,255,255,.14);
+  box-shadow:0 14px 34px rgba(11,61,46,.30);
+}
+.dif-card .dif-title,.dif-card .dif-text,.dif-card .dif-icon{
+  transition:color .3s ease;
+}
+.dif-card:hover .dif-title{color:var(--white);}
+.dif-card:hover .dif-text{color:rgba(255,255,255,.78);}
+/* --lime-400: mesmo tom dos kickers sobre fundo escuro, 5.65:1 */
+.dif-card:hover .dif-icon{color:var(--lime-400);}
+.dif-card .dif-icon::before{transition:background .3s ease;}
+.dif-card:hover .dif-icon::before{
+  background:radial-gradient(circle,rgba(124,194,92,.34) 0%,transparent 70%);
+}
+@media(prefers-reduced-motion:reduce){
+  .dif-card .dif-title,.dif-card .dif-text,.dif-card .dif-icon,
+  .dif-card .dif-icon::before{transition:none;}
+}
+
+/* ── RODAPE · fundo de imagem ────────────────────────────────────────────── */
+/* a cor de fundo fica como fallback e como base sob o cover */
+footer{
+  background:#012C21 url(assets/footer-bg.png) center bottom/cover no-repeat;
+  padding-top:var(--section-y);
+  padding-bottom:var(--space-8);
+}
+
+/* ── SELO DE DESTAQUE · card LIPAX CLEAN ────────────────────────────────── */
+/* o card trocou overflow:hidden por visible para o selo transbordar, entao o
+   arredondamento passa a ser feito pelos filhos que tocam cada canto */
+.pm-strip{border-radius:16px 16px 0 0;}
+.pm-media{border-bottom-left-radius:16px;}
+.pm-content{border-bottom-right-radius:16px;}
+
+/* 45%: e onde .pm-media (45%) encontra .pm-content, nao os 50% do meio do card */
+.pm-selo{
+  position:absolute;top:-28px;left:45%;z-index:10;
+  width:96px;height:96px;object-fit:contain;
+  transform:translateX(-50%) rotate(-8deg);
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.25));
+  pointer-events:none;
+}
+
+@media(max-width:768px){
+  /* empilhado: .pm-media ocupa a largura toda, entao o corte de baixo vai
+     inteiro para .pm-content */
+  .pm-media{border-bottom-left-radius:0;}
+  .pm-content{border-radius:0 0 16px 16px;}
+  .pm-selo{width:72px;height:72px;top:-20px;left:auto;right:16px;transform:rotate(-8deg);}
+}
+
+/* ── CADASTRO · fundo de imagem e glow ──────────────────────────────────── */
+/* cover/center como o object-fit pedido; a cor entra como base sob a imagem */
+#cadastro{
+  background:var(--green-hero) url(/public/bg-cadastro.png) center/cover no-repeat;
+}
+
+.cad-title{text-shadow:0 0 16px rgba(255,255,255,.18);}
+/* o span herdaria o glow branco do h2; o proprio text-shadow o substitui */
+.cad-title-lime{
+  color:var(--green-lt);
+  text-shadow:0 0 12px rgba(124,194,92,.5),0 0 32px rgba(124,194,92,.25);
+}
+#cadastro .sec-tag{text-shadow:0 0 10px rgba(124,194,92,.4);}
+.cad-bullet-ico{box-shadow:0 0 12px rgba(124,194,92,.35);}
+
+/* halo externo para o card descolar do fundo; nada dentro dele recebe glow */
+.cad-card{
+  background:var(--white);border-radius:20px;overflow:hidden;
+  box-shadow:0 12px 40px rgba(0,0,0,.35),0 0 60px rgba(124,194,92,.12);
+}
+
+/* ══════════ FAQ · redesenho ════════════════════════════════════════════ */
+.faq{background:#F3F4F6;}
+.faq .sec-in{max-width:720px;}
+
+.faq-head{text-align:center;margin-bottom:var(--space-10);}
+.faq-title{
+  font-family:var(--font-display);
+  font-size:clamp(var(--fs-h1),4vw,var(--fs-display-md));
+  font-weight:var(--fw-bold);line-height:var(--lh-heading);letter-spacing:var(--ls-tight);
+  color:#14261E;
+}
+/* green-700: 5.99:1 sobre #F3F4F6; o 600 para em 4.46 e o 500 em 3.2 */
+.faq-title span{color:var(--green-700);}
+.faq-sub{font-size:var(--fs-body);color:#4B5563;margin-top:var(--space-3);}
+
+.faq-list{display:flex;flex-direction:column;gap:0;}
+.faq-item{
+  background:#FFFFFF;border-radius:12px;border:1px solid rgba(0,0,0,.05);
+  border-left:3px solid transparent;margin-bottom:10px;overflow:hidden;
+  transition:box-shadow 250ms ease-out,border-color 250ms ease-out;
+}
+/* a faixa ja existe transparente no estado fechado: so troca de cor ao abrir,
+   entao o conteudo nao desloca 3px quando o item expande */
+.faq-item:hover{box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.faq-item.open{border-left-color:var(--green-700);box-shadow:0 4px 20px rgba(0,0,0,.08);}
+
+.faq-question{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px 20px;background:none;border:0;text-align:left;cursor:pointer;
+}
+.faq-q-txt{
+  font-family:var(--font-display);font-size:var(--fs-body);
+  font-weight:var(--fw-semibold);color:#14261E;line-height:1.4;
+}
+.faq-item.open .faq-q-txt{font-weight:var(--fw-bold);}
+
+.faq-ico{
+  position:relative;flex:none;display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;background:transparent;
+  transition:background 250ms ease-out,transform 250ms ease-out;
+}
+.faq-item.open .faq-ico{background:var(--green-700);transform:rotate(180deg);}
+.faq-ico-plus{font-size:20px;line-height:1;color:#6B7280;transition:opacity 250ms ease-out;}
+.faq-item.open .faq-ico-plus{opacity:0;}
+/* o chevron e desenhado apontando para CIMA: com o wrapper a 180deg ele aponta
+   para baixo, entao a rotacao do icone e a troca de simbolo sao o mesmo gesto */
+.faq-ico-chev{position:absolute;width:18px;height:18px;color:#FFFFFF;opacity:0;transition:opacity 250ms ease-out;}
+.faq-item.open .faq-ico-chev{opacity:1;}
+
+.faq-answer{display:grid;grid-template-rows:0fr;transition:grid-template-rows 250ms ease-out;}
+.faq-answer > div{overflow:hidden;}
+.faq-item.open .faq-answer{grid-template-rows:1fr;}
+.faq-answer p{
+  margin:0 20px 18px;padding-top:16px;border-top:1px solid #E5E7EB;
+  font-size:15px;color:#4B5563;line-height:1.6;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .faq-item,.faq-ico,.faq-ico-plus,.faq-ico-chev,.faq-answer{transition:none;}
+}
+
+/* ══════════ PRODUTOS · profundidade dos cards ═════════════════════════ */
+/* --pm-rgb: o mesmo tom de --pm em canais separados, para compor os alfas */
+.pm-card{
+  --pm-rgb:46,155,138;
+  border:1px solid rgba(var(--pm-rgb),.18);
+  box-shadow:
+    0 1px 2px rgba(20,38,30,.04),
+    0 8px 24px rgba(20,38,30,.08),
+    0 0 48px rgba(var(--pm-rgb),.10);
+  transition:transform 260ms ease-out,box-shadow 260ms ease-out;
+}
+.pm-card--enzyme{--pm-rgb:46,155,138;}
+.pm-card--clean {--pm-rgb:123,94,167;}
+
+.pm-card:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 1px 2px rgba(20,38,30,.04),
+    0 14px 32px rgba(20,38,30,.12),
+    0 0 56px rgba(var(--pm-rgb),.16);
+}
+
+/* separa a coluna tonal da coluna branca */
+.pm-content{border-left:1px solid rgba(0,0,0,.05);}
+.pm-strip{border-bottom:1px solid rgba(var(--pm-rgb),.12);}
+
+@media(max-width:768px){
+  /* empilhado, a divisa entre as colunas deixa de ser vertical */
+  .pm-content{border-left:0;border-top:1px solid rgba(0,0,0,.05);}
+}
+@media(prefers-reduced-motion:reduce){
+  .pm-card{transition:none;}
+  .pm-card:hover{transform:none;}
+}
+
+/* ══════════ DISTRIBUIDORES · mapa 2D ═══════════════════════════════════
+   Um pino por CIDADE, nao por unidade nem por pixel ajustado a mao: a
+   posicao vem da mesma media de lat/lon que os data-* do .distrib-item ja
+   carregavam pro mapa 3D antigo. Cidades com 2+ unidades (Arapongas,
+   Londrina) ganham um badge de contagem em vez de disputar o mesmo ponto.
+   Ver assets/mapa2d.js. */
+.distribuidores{background:var(--green-hero);}
+.distrib-header .sec-tag{color:var(--lime-400)!important;}
+.distrib-header h2{color:var(--white);}
+.distrib-header p{color:rgba(255,255,255,.72);}
+
+/* lista adaptada ao fundo escuro */
+.distrib-item{
+  background:rgba(255,255,255,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.12);border-radius:12px;
+  transition:border-color 200ms ease-out,box-shadow 200ms ease-out,background 200ms ease-out;
+  cursor:pointer;
+}
+.distrib-item:hover,.distrib-item:focus-visible{
+  background:rgba(255,255,255,.10);border-color:var(--lime-400);
+  box-shadow:0 0 0 1px rgba(124,194,92,.35),0 0 24px rgba(124,194,92,.22);outline:none;
+}
+/* selecionado a partir do mapa (ou o inverso): laranja terciario de
+   verdade (--orange-500, dos tokens) — a variavel --orange local do
+   arquivo aponta pro lime por engano, entao aqui usamos a certa de
+   proposito, separada do hover em lime pra nao confundir "selecionado"
+   com "passando o mouse" */
+.distrib-item.is-selecionado{
+  background:rgba(234,102,33,.10);border-color:var(--orange-500);
+  box-shadow:0 0 0 1px rgba(234,102,33,.35),0 0 24px rgba(234,102,33,.22);
+}
+.distrib-nome{color:var(--white);}
+.distrib-cidade{color:rgba(255,255,255,.62);}
+.sede-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+.sede-card h4{color:var(--white);}
+.sede-card p{color:rgba(255,255,255,.62);}
+
+/* palco */
+.mapa-wrapper{background:transparent;border:1px solid rgba(255,255,255,.10);border-radius:20px;overflow:hidden;position:relative;}
+.mapa-label{
+  position:absolute;top:14px;left:14px;z-index:3;color:rgba(255,255,255,.85);
+  font-size:12px;font-weight:700;padding:7px 14px;border-radius:999px;
+  background:rgba(6,32,24,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.mapa-2d{
+  position:relative;width:100%;aspect-ratio:99.9/74.4;
+  background:radial-gradient(ellipse 70% 60% at 62% 38%,rgba(124,194,92,.13),transparent 65%),rgba(255,255,255,.025);
+}
+.mapa-2d-svg{position:absolute;inset:0;width:100%;height:100%;display:block;}
+
+/* pino em balao, tipo Google Maps: a ponta (nao o centro) e o ponto
+   geografico real, entao a ancora e translate(-50%,-100%), nao -50%,-50% */
+.cs-pin{
+  position:absolute;transform:translate(-50%,-100%);padding:0;border:0;background:none;
+  cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;font:inherit;
+  display:block;line-height:0;
+}
+.cs-pin:focus-visible{outline:2px solid var(--lime-400);outline-offset:3px;border-radius:6px;}
+.cs-pin--sede{z-index:4;}
+.cs-pin.is-ativo{z-index:6;}
+
+/* svg.cs-pin-icon (com o tipo no seletor), nao so .cs-pin-icon: a regra
+   antiga ".mapa-wrapper svg{width:100%;height:100%}" (da 1a versao do
+   mapa, ainda usada pelo SVG do contorno) tem a mesma especificidade —
+   sem o tipo aqui ela ganhava no empate e o pino virava um SVG de
+   300x400 (fallback de tamanho padrao do navegador) */
+svg.cs-pin-icon{
+  display:block;width:26px;height:35px;transform-origin:50% 100%;
+  filter:drop-shadow(0 3px 5px rgba(0,0,0,.4));
+  transition:transform 160ms ease-out,filter 180ms ease-out;
+}
+.cs-pin--sede svg.cs-pin-icon{width:34px;height:46px;}
+.cs-pin:hover .cs-pin-icon{transform:scale(1.12);}
+.cs-pin.is-ativo .cs-pin-icon{
+  transform:scale(1.12);
+  filter:drop-shadow(0 4px 12px rgba(234,102,33,.6));
+}
+.cs-pin-fill{fill:var(--lime-400);transition:fill 180ms ease-out;}
+.cs-pin--sede .cs-pin-fill{fill:var(--green-lt);}
+.cs-pin.is-ativo .cs-pin-fill{fill:var(--orange-500);}
+.cs-pin-hole{fill:var(--green-hero);}
+.cs-pin--sede .cs-pin-hole{fill:#FFD700;}
+
+/* eco na ponta: o mesmo pulso de antes, so que agora no pe do balao,
+   onde a coordenada real esta */
+.cs-halo{
+  position:absolute;left:50%;bottom:1px;width:12px;height:12px;margin-left:-6px;
+  border-radius:50%;background:var(--lime-400);pointer-events:none;
+  animation:cs-pulse 2.4s ease-out infinite;
+}
+.cs-pin--sede .cs-halo{width:16px;height:16px;margin-left:-8px;background:var(--green-lt);}
+.cs-pin.is-ativo .cs-halo{background:var(--orange-500);}
+@keyframes cs-pulse{0%{transform:scale(1);opacity:.55;}70%,100%{transform:scale(2.4);opacity:0;}}
+
+.cs-pin-badge{
+  position:absolute;top:-3px;right:-3px;width:16px;height:16px;border-radius:50%;
+  background:var(--green-hero);color:var(--lime-400);font-size:9.5px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;border:1.5px solid var(--lime-400);
+}
+.cs-pin.is-ativo .cs-pin-badge{color:var(--orange-500);border-color:var(--orange-500);}
+
+.cs-pin-label{
+  position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:5px;
+  white-space:nowrap;font-size:9.5px;font-weight:600;color:#fff;
+  background:rgba(6,32,24,.85);border:1px solid rgba(255,255,255,.14);padding:3px 9px;
+  border-radius:999px;text-shadow:0 6px 16px rgba(0,0,0,.4);
+  opacity:0;pointer-events:none;transition:opacity 140ms ease-out;
+  max-width:38vw;overflow:hidden;text-overflow:ellipsis;
+}
+.cs-pin--sede .cs-pin-label{opacity:1;font-size:10.5px;font-weight:700;background:rgba(6,32,24,.55);}
+.cs-pin:hover .cs-pin-label,.cs-pin.is-ativo .cs-pin-label{opacity:1!important;}
+.cs-pin.is-ativo .cs-pin-label{
+  font-size:11px;font-weight:800;background:var(--orange-500);
+  border-color:var(--orange-500);box-shadow:0 8px 20px rgba(234,102,33,.4);
+}
+
+.cs-arc{
+  stroke:rgba(124,194,92,.42);stroke-width:.3;stroke-dasharray:1.3 1.3;opacity:.45;
+  transition:stroke 200ms ease-out,opacity 200ms ease-out,stroke-width 200ms ease-out;
+}
+.cs-arc.is-ativo{stroke:var(--orange-500);stroke-width:.6;opacity:.95;}
+.cs-arc.is-fraco{opacity:.12;}
+
+@media(prefers-reduced-motion:reduce){
+  .distrib-item,.cs-pin-dot,.cs-pin-label,.cs-arc{transition:none;}
+  .cs-halo{animation:none;display:none;}
+}
+
+/* ── dados da unidade: o item vira acordeao, o cabecalho leva o padding ── */
+.distrib-item{display:block;padding:0;overflow:hidden;}
+/* a sede nao abre — os dados dela estao no .sede-card logo abaixo —,
+   entao ela mantem o padding e o flex que o cabecalho assumiu nas outras */
+.distrib-item.sede{display:flex;align-items:center;gap:14px;padding:14px 18px;}
+.distrib-head{
+  width:100%;display:flex;align-items:center;gap:14px;padding:14px 18px;
+  background:none;border:0;text-align:left;color:inherit;font:inherit;cursor:pointer;
+}
+/* dentro do botao nome e cidade sao span: sem isto empilham na mesma linha */
+.distrib-head .distrib-nome,.distrib-head .distrib-cidade{display:block;}
+.distrib-chev{margin-left:auto;flex:none;width:16px;height:16px;color:rgba(255,255,255,.42);
+  transition:transform 250ms ease-out,color 250ms ease-out;}
+.distrib-chev svg{width:100%;height:100%;display:block;}
+.distrib-item.aberto .distrib-chev{transform:rotate(180deg);color:var(--lime-400);}
+
+/* mesma mecanica do FAQ: 0fr->1fr anima altura sem medir nada em JS */
+.distrib-det{display:grid;grid-template-rows:0fr;transition:grid-template-rows 250ms ease-out;}
+.distrib-det > div{overflow:hidden;}
+.distrib-item.aberto .distrib-det{grid-template-rows:1fr;}
+
+.distrib-dados{
+  margin:0 18px 16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);
+  display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:var(--fs-caption);
+}
+/* .42 dava 3,18:1 sobre o vidro (#1a4939 composto); .58 fecha em 4,63:1 */
+.distrib-dados dt{color:rgba(255,255,255,.58);white-space:nowrap;}
+.distrib-dados dd{margin:0;color:rgba(255,255,255,.82);line-height:1.55;}
+.distrib-dados a{color:var(--lime-400);text-decoration:none;}
+.distrib-dados a:hover,.distrib-dados a:focus-visible{text-decoration:underline;}
+
+/* ── Lista de Distribuidores: Cidades como itens principais e clientes ocultos ── */
+.distrib-list{display:flex;flex-direction:column;gap:10px;}
+
+.distrib-cidade-item{
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  overflow:hidden;
+  transition:border-color 200ms ease-out,box-shadow 200ms ease-out,background 200ms ease-out;
+}
+.distrib-cidade-item:hover{
+  background:rgba(255,255,255,.10);
+  border-color:var(--lime-400);
+  box-shadow:0 0 0 1px rgba(124,194,92,.35),0 0 24px rgba(124,194,92,.22);
+}
+.distrib-cidade-item.aberto{
+  background:rgba(255,255,255,.08);
+  border-color:var(--lime-400);
+  box-shadow:0 0 0 1px rgba(124,194,92,.25),0 0 20px rgba(124,194,92,.15);
+}
+.distrib-cidade-item:has(.distrib-item.is-selecionado),
+.distrib-cidade-item.is-ativo-mapa{
+  background:rgba(234,102,33,.08);
+  border-color:var(--orange-500);
+  box-shadow:0 0 0 1px rgba(234,102,33,.35),0 0 24px rgba(234,102,33,.22);
+}
+
+.distrib-cidade-head{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 18px;
+  background:none;
+  border:0;
+  text-align:left;
+  color:inherit;
+  font:inherit;
+  cursor:pointer;
+}
+.distrib-cidade-head .distrib-nome{
+  font-size:var(--fs-body-sm);
+  font-weight:700;
+  color:var(--white);
+  display:block;
+}
+.distrib-cidade-head .distrib-sub{
+  font-size:var(--fs-caption);
+  color:rgba(255,255,255,.62);
+  margin-top:2px;
+  display:block;
+}
+.distrib-cidade-item.aberto > .distrib-cidade-head .distrib-chev{
+  transform:rotate(180deg);
+  color:var(--lime-400);
+}
+
+/* Menu de clientes que abre dentro da cidade */
+.distrib-cidade-body{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows 260ms ease-out;
+}
+.distrib-cidade-body > div{
+  overflow:hidden;
+}
+.distrib-cidade-item.aberto > .distrib-cidade-body{
+  grid-template-rows:1fr;
+}
+
+.distrib-clientes-lista{
+  margin:0 14px 14px;
+  padding-top:10px;
+  border-top:1px solid rgba(255,255,255,.10);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.distrib-clientes-label{
+  font-size:10.5px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:rgba(255,255,255,.50);
+  margin-bottom:2px;
+  padding:0 2px;
+}
+
+/* Cartão do cliente dentro do menu da cidade */
+.distrib-clientes-lista .distrib-item{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:10px;
+}
+.distrib-clientes-lista .distrib-item:hover{
+  background:rgba(255,255,255,.09);
+  border-color:rgba(168,209,86,.45);
+  box-shadow:none;
+}
+.distrib-clientes-lista .distrib-item.aberto{
+  background:rgba(255,255,255,.08);
+  border-color:var(--lime-400);
+}
+.distrib-cliente-head{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 14px;
+  background:none;
+  border:0;
+  text-align:left;
+  color:inherit;
+  font:inherit;
+  cursor:pointer;
+}
+.distrib-cliente-head .distrib-nome{
+  font-size:13.5px;
+  font-weight:700;
+  color:var(--white);
+  display:block;
+}
+.distrib-cliente-head .distrib-cidade{
+  font-size:11.5px;
+  color:rgba(255,255,255,.60);
+  display:block;
+}
+.distrib-cliente-badge-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--lime-400);
+  flex-shrink:0;
+}
+.distrib-clientes-lista .distrib-dados{
+  margin:0 14px 14px;
+  padding-top:10px;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .distrib-det,.distrib-chev{transition:none;}
+}
+
+/* desdobramento do blend: nao vira chip para nao repetir a Protease */
+.pm-tags-nota{flex-basis:100%;margin-top:2px;font-size:var(--fs-caption);color:var(--ink3);line-height:1.4;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ HERO (Care Systems Hero) ═══════════════════════ -->
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<header class="cs-hero" id="home">
+
+  <div class="cs-hero-top">
+
+    <div class="cs-hero-bg cs-only-wide">
+      <img src="assets/hero-lipax-proline.png" alt="LIPAX Enzyme e LIPAX Clean — detergentes enzimáticos Pro Line" style="width:100%;height:100%;object-fit:cover;object-position:76% center;display:block">
+      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to right,#0B3D2E 0%,rgba(11,61,46,0.92) 18%,rgba(11,61,46,0.45) 42%,rgba(11,61,46,0) 70%)"></div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(11,61,46,0.35) 0%,rgba(11,61,46,0) 30%,rgba(11,61,46,0) 75%,rgba(11,61,46,0.4) 100%)"></div>
+    </div>
+
+    <nav class="cs-nav">
+      <a href="#home" class="cs-nav-logo">
+        <img src="assets/logo-care-systems.png" alt="Care Systems Bio Enzymes" class="cs-logo-img">
+      </a>
+
+      <div class="cs-nav-links cs-only-wide">
+        <a href="#historia" class="cs-nav-link">Sobre Nós</a>
+        <a href="#linhas" class="cs-nav-link">Linhas</a>
+        <a href="#produtos" class="cs-nav-link">Enzimas</a>
+        <a href="#cadastro" class="cs-nav-link">Contato</a>
+      </div>
+
+      <div class="cs-nav-right">
+        <a href="#produtos" class="cs-nav-manual cs-only-wide">
+          <span class="cs-cta-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
+            Manual de Produtos
+          </span>
+        </a>
+        <button aria-label="Menu" class="cs-burger cs-only-narrow" data-cs-menu>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 6h18"></path><path d="M3 12h18"></path><path d="M3 18h18"></path></svg>
+        </button>
+      </div>
+    </nav>
+
+    <div class="cs-menu" id="cs-menu" hidden>
+      <button aria-label="Fechar" class="cs-menu-close" data-cs-menu>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+      <a href="#historia" class="cs-menu-link" data-cs-menu>Sobre Nós</a>
+      <a href="#linhas" class="cs-menu-link" data-cs-menu>Linhas</a>
+      <a href="#produtos" class="cs-menu-link" data-cs-menu>Enzimas</a>
+      <a href="#cadastro" class="cs-menu-link" data-cs-menu>Contato</a>
+    </div>
+
+    <section class="cs-textcol">
+      <div class="cs-eyebrow">17 anos de inovação enzimática brasileira</div>
+
+      <h1 class="cs-h1">
+        <span style="display:block;white-space:nowrap">
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span style="display:inline-block;color:rgba(255,255,255,0.55);animation:csWordReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s both">Porque&nbsp;</span></span>
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span style="display:inline-block;animation:csWordReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.4s both">Cuidar</span></span>
+        </span>
+        <span style="display:block;white-space:nowrap">
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span style="display:inline-block;color:rgba(255,255,255,0.55);animation:csWordReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s both">é&nbsp;</span></span>
+          <span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span style="display:inline-block;animation:csWordReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.6s both">Revolucionar.</span></span>
+        </span>
+      </h1>
+
+      <div class="cs-textcol-body">
+        <p class="cs-lead">A Care Systems Bio Enzymes protege profissionais e ambientes com a força das enzimas, soluções 100% brasileiras, biodegradáveis e com tecnologia de ponta.</p>
+
+        <div class="cs-formcard" id="cs-formcard">
+          <div class="cs-card-head">
+            <span>Quero ser distribuidor</span>
+            <div class="cs-prog"><i class="cs-prog-fill" id="cs-prog"></i></div>
+          </div>
+
+          <div class="cs-card-body" id="cs-card-body">
+            <div class="cs-etapa" id="cs-etapa">Etapa 1 de 5</div>
+            <div class="cs-steptitle" id="cs-steptitle">Seus dados de contato</div>
+
+            <div class="cs-row" data-cs-panel="1">
+              <label class="cs-fld">
+                <input class="cs-in" type="text" data-cs-field="name" placeholder="Nome completo">
+                <span class="cs-fld-err" data-cs-err="name"></span>
+              </label>
+              <label class="cs-fld">
+                <input class="cs-in" type="email" data-cs-field="email" placeholder="Seu melhor e-mail">
+                <span class="cs-fld-err" data-cs-err="email"></span>
+              </label>
+            </div>
+
+            <div class="cs-row" data-cs-panel="2" hidden>
+              <label class="cs-fld">
+                <input class="cs-in" type="tel" data-cs-field="phone" placeholder="(00) 00000-0000">
+                <span class="cs-fld-err" data-cs-err="phone"></span>
+              </label>
+              <label class="cs-fld">
+                <span class="cs-selwrap">
+                  <select class="cs-in cs-sel" data-cs-field="profile">
+                    <option value="">Você é...</option>
+                    <option value="empresa">Empresa / Distribuidor</option>
+                    <option value="clinica">Dentista / Clínica</option>
+                  </select>
+                  <svg class="cs-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA39A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </span>
+                <span class="cs-fld-err" data-cs-err="profile"></span>
+              </label>
+            </div>
+
+            <div class="cs-row" data-cs-panel="3" hidden>
+              <label class="cs-fld">
+                <input class="cs-in" type="text" data-cs-field="company" placeholder="Razão social ou nome fantasia">
+                <span class="cs-fld-err" data-cs-err="company"></span>
+              </label>
+              <label class="cs-fld">
+                <input class="cs-in" type="text" inputmode="numeric" data-cs-field="cnpj" placeholder="00.000.000/0000-00">
+                <span class="cs-fld-err" data-cs-err="cnpj"></span>
+              </label>
+            </div>
+
+            <div class="cs-row" data-cs-panel="4" hidden>
+              <label class="cs-fld cs-fld-2">
+                <input class="cs-in" type="text" data-cs-field="city" placeholder="Sua cidade">
+                <span class="cs-fld-err" data-cs-err="city"></span>
+              </label>
+              <label class="cs-fld cs-fld-1">
+                <span class="cs-selwrap">
+                  <select class="cs-in cs-sel" data-cs-field="uf">
+                    <option value="">UF</option>
+                    <option value="PR">PR</option><option value="SP">SP</option><option value="SC">SC</option><option value="RS">RS</option><option value="MG">MG</option><option value="RJ">RJ</option><option value="GO">GO</option><option value="MS">MS</option><option value="MT">MT</option><option value="BA">BA</option><option value="PE">PE</option><option value="CE">CE</option><option value="Outro">Outro</option>
+                  </select>
+                  <svg class="cs-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA39A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </span>
+                <span class="cs-fld-err" data-cs-err="uf"></span>
+              </label>
+            </div>
+
+            <div class="cs-row" data-cs-panel="5" hidden>
+              <label class="cs-fld">
+                <span class="cs-selwrap">
+                  <select class="cs-in cs-sel" data-cs-field="product">
+                    <option value="">Produto de interesse</option>
+                    <option value="enzyme">LIPAX ENZYME — instrumentais</option>
+                    <option value="clean">LIPAX CLEAN — cuspideiras</option>
+                    <option value="ambos">Ambos os produtos</option>
+                  </select>
+                  <svg class="cs-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA39A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </span>
+                <span class="cs-fld-err" data-cs-err="product"></span>
+              </label>
+            </div>
+
+            <button type="button" class="cs-submit" id="cs-submit">Continuar →</button>
+            <p class="cs-submit-err" id="cs-submit-err" hidden></p>
+
+            <div class="cs-card-foot">
+              <a href="#" class="cs-back" id="cs-back" hidden>← voltar</a>
+            </div>
+            <p class="cs-privacy">Dados confidenciais · não compartilhados com terceiros</p>
+          </div>
+
+          <div class="cs-card-body cs-done" id="cs-done" hidden>
+            <div class="cs-done-ico">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            </div>
+            <div class="cs-done-title">Solicitação enviada!</div>
+            <p class="cs-done-txt">Nossa equipe entra em contato via WhatsApp em até 24 horas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="cs-hero-mobileimg cs-only-narrow">
+    <img src="assets/hero-lipax-proline.png" alt="LIPAX Enzyme e LIPAX Clean — detergentes enzimáticos Pro Line" style="width:100%;height:100%;object-fit:cover;object-position:right center;display:block">
+    <!-- funde com o verde solido do card acima: sem isso a foto cortava seca
+         logo depois do botao, como um retangulo colado por engano -->
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,#0B3D2E 0%,rgba(11,61,46,.88) 8%,rgba(11,61,46,0) 38%,rgba(11,61,46,0) 72%,rgba(11,61,46,.5) 100%)"></div>
+  </div>
+
+</header>
+
+<!-- ═══════════════════════ VÍDEO ═══════════════════════ -->
+<section class="stats-marquee" aria-label="Indicadores Care Systems">
+  <div class="stats-marquee-viewport">
+    <div class="stats-marquee-track">
+      <div class="stats-marquee-group">
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">17+</strong><span class="stats-marquee-label">Anos de mercado</span></div>
+        <span class="stats-marquee-separator" aria-hidden="true"></span>
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">50+</strong><span class="stats-marquee-label">Produtos desenvolvidos</span></div>
+        <span class="stats-marquee-separator" aria-hidden="true"></span>
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">4</strong><span class="stats-marquee-label">Linhas de produto</span></div>
+        <span class="stats-marquee-separator" aria-hidden="true"></span>
+      </div>
+      <div class="stats-marquee-group" aria-hidden="true">
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">17+</strong><span class="stats-marquee-label">Anos de mercado</span></div>
+        <span class="stats-marquee-separator"></span>
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">50+</strong><span class="stats-marquee-label">Produtos desenvolvidos</span></div>
+        <span class="stats-marquee-separator"></span>
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">4</strong><span class="stats-marquee-label">Linhas de produto</span></div>
+        <span class="stats-marquee-separator"></span>
+      </div>
+      <div class="stats-marquee-group" aria-hidden="true">
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">17+</strong><span class="stats-marquee-label">Anos de mercado</span></div>
+        <span class="stats-marquee-separator"></span>
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">50+</strong><span class="stats-marquee-label">Produtos desenvolvidos</span></div>
+        <span class="stats-marquee-separator"></span>
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">4</strong><span class="stats-marquee-label">Linhas de produto</span></div>
+        <span class="stats-marquee-separator"></span>
+      </div>
+      <div class="stats-marquee-group" aria-hidden="true">
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">17+</strong><span class="stats-marquee-label">Anos de mercado</span></div>
+        <span class="stats-marquee-separator"></span>
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">50+</strong><span class="stats-marquee-label">Produtos desenvolvidos</span></div>
+        <span class="stats-marquee-separator"></span>
+        <div class="stats-marquee-item"><strong class="stats-marquee-value">4</strong><span class="stats-marquee-label">Linhas de produto</span></div>
+        <span class="stats-marquee-separator"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="video-sec" id="video">
+  <div class="dotted-surface" aria-hidden="true"></div>
+  <div class="video-in">
+    <span class="sec-tag">Veja na prática</span>
+    <h2>Tecnologia enzimática que transforma o cuidado com pessoas e ambientes</h2>
+    <p>Conheça a Care Systems, nossa história e como nossas soluções estão mudando padrões de higienização no Brasil.</p>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/uGEPafy6jXM" title="Vídeo institucional Care Systems Bio Enzymes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>
+    </div>
+    <p class="video-label">▶ Vídeo institucional Care Systems Bio Enzymes</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════ HISTÓRIA ═══════════════════════ -->
+<section class="historia" id="historia">
+  <div class="sec-in">
+    <div class="historia-grid">
+      <div class="historia-img">
+        <img src="assets/sede-care-systems.jpg" alt="Sede da Care Systems em São João da Boa Vista, SP" loading="lazy" decoding="async" width="1122" height="1402" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+        <div class="historia-badge">
+          <div class="historia-badge-text">
+            <strong>Pioneiros em enzimas no Brasil</strong>
+            <span>Do invólucro à formulação, tecnologia 100% nacional</span>
+          </div>
+        </div>
+      </div>
+      <div class="historia-content">
+        <span class="sec-tag">Nossa História</span>
+        <h2>17 anos transformando o cuidado com <strong>tecnologia enzimática brasileira</strong></h2>
+        <p>A Care Systems nasceu da distribuição de biocidas sanitizantes para a agroindústria, desenvolvidos em parceria com a <strong>Universidade Federal de Lavras (UFLA)</strong> - onde ficou incubada por anos. Hoje, é reconhecida como a primeira empresa fornecedora de insumos inovadores do país, com bioprotetores e biofiltros para águas residuais.</p>
+        <p>Com mais de 50 produtos desenvolvidos e parcerias ativas com <strong>UFLA</strong> e <strong>ESALQ/USP</strong>, garantimos um fundo de investimento em pesquisa e formação dos melhores talentos do setor.</p>
+        <div class="historia-pilares">
+          <div class="pilar">
+            <div class="pilar-label">
+              <svg class="pilar-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 4 13c0-6 8-9 16-9 0 8-3 16-9 16Z"></path><path d="M4 21c2-6 6-9 11-11"></path></svg>
+              Missão
+            </div>
+            <div class="pilar-text">Proteger profissionais e ambientes com sanitizantes enzimáticos seguros e sustentáveis.</div>
+          </div>
+          <div class="pilar">
+            <div class="pilar-label">
+              <svg class="pilar-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              Visão
+            </div>
+            <div class="pilar-text">Ser referência nacional em soluções enzimáticas para agro, sanitário e cuidado.</div>
+          </div>
+          <div class="pilar">
+            <div class="pilar-label">
+              <svg class="pilar-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.5-1.5 3-3.4 3-5.5A4.5 4.5 0 0 0 12 6a4.5 4.5 0 0 0-10 2.5C2 10.6 3.5 12.5 5 14l7 7Z"></path></svg>
+              Valores
+            </div>
+            <div class="pilar-text">Sustentabilidade · Inovação · Eficiência · Segurança · Responsabilidade social</div>
+          </div>
+          <div class="pilar">
+            <div class="pilar-label">
+              <svg class="pilar-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.9 5.9 6.1.9-4.5 4.3 1.1 6.4L12 17.5 6.4 20.5l1.1-6.4L3 9.8l6.1-.9L12 3Z"></path></svg>
+              Diferenciais
+            </div>
+            <div class="pilar-text">Formulação desde a base, tecnologia própria, zero comparação com químicos.</div>
+          </div>
+        </div>
+        <div class="parceiros">
+          <span class="hist-meta">Parceria com as maiores instituições públicas do Brasil</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ NÚMEROS ═══════════════════════ -->
+<section class="numeros">
+  <div class="sec-in">
+    <div class="numeros-grid">
+      <div class="num-card">
+        <div class="num-v">LIPAX <span>ENZYME</span></div>
+        <div class="num-l">Detergente enzimático</div>
+      </div>
+      <div class="num-card">
+        <div class="num-v">LIPAX <span>CLEAN</span></div>
+        <div class="num-l">Detergente enzimático</div>
+      </div>
+      <div class="num-card">
+        <div class="num-v">LIPHOS <span>FRESH</span></div>
+        <div class="num-l">Aromatizante enzimático</div>
+      </div>
+      <div class="num-card">
+        <div class="num-v">CUIDAR</div>
+        <div class="num-l">Sabonete líquido enzimático</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ LINHA DENTAL MED · DESTAQUE ═══════════════════════ -->
+<section class="pm produtos" id="produtos">
+  <img class="pm-bg" src="/public/bg-produtos.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  <div class="pm-in">
+    <h2 class="pm-title">Dois produtos. Um protocolo completo de higienização.</h2>
+
+    <div class="pm-grid">
+
+      <article class="pm-card pm-card--enzyme">
+        <div class="pm-strip">Linha Dental Med</div>
+        <div class="pm-body">
+          <div class="pm-media">
+            <img src="/public/produtos/lipax-enzyme-card.jpg" data-pm-full="/public/produtos/lipax-enzyme.png" alt="Frasco de LIPAX ENZYME 1L — clique para ampliar" role="button" tabindex="0" width="810" height="1012" loading="lazy" decoding="async">
+          </div>
+          <div class="pm-content">
+            <div class="pm-name">LIPAX ENZYME</div>
+            <div class="pm-kicker">Higienização de instrumentos</div>
+            <p class="pm-desc">Detergente multienzimático concentrado para limpeza de instrumentais odontológicos, médicos e hospitalares. pH neutro — não corrói, não mancha, não danifica.</p>
+
+            <div class="pm-tags">
+              <span class="pm-tag">Amilase</span>
+              <span class="pm-tag">Protease</span>
+              <span class="pm-tag">Lipase-Carboidrase</span>
+              <div class="pm-tags-nota">(Lipase, Celulase, Pectinase, Protease)</div>
+            </div>
+
+            <div class="pm-specs">
+              <div class="pm-spec">
+                <svg class="pm-spec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 10.5a6 6 0 0 1-12 0C6 9.5 12 3 12 3Z"></path></svg>
+                <div>
+                  <div class="pm-spec-k">Diluição</div>
+                  <div class="pm-spec-v">0,2–0,5%</div>
+                </div>
+              </div>
+              <div class="pm-spec">
+                <svg class="pm-spec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12"></path><path d="M6 21h12"></path><path d="M8 3v4l4 5 4-5V3"></path><path d="M8 21v-4l4-5 4 5v4"></path></svg>
+                <div>
+                  <div class="pm-spec-k">Imersão</div>
+                  <div class="pm-spec-v">10 minutos</div>
+                </div>
+              </div>
+              <div class="pm-spec">
+                <svg class="pm-spec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v6.5L4.5 18A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-3L14 8.5V2"></path><path d="M8 2h8"></path><path d="M7.5 15h9"></path></svg>
+                <div>
+                  <div class="pm-spec-k">pH</div>
+                  <div class="pm-spec-v">6,91 ± 0,02</div>
+                </div>
+              </div>
+              <div class="pm-spec">
+                <svg class="pm-spec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path><path d="M8 3v4"></path><path d="M16 3v4"></path></svg>
+                <div>
+                  <div class="pm-spec-k">Validade</div>
+                  <div class="pm-spec-v">18 meses</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pm-btn-wrap">
+              <a class="pm-btn" href="#cadastro">Solicitar informações</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="pm-card pm-card--clean">
+        <img class="pm-selo" src="/public/selos/solucao-cuspideira.png" alt="Solução para sua cuspideira" width="96" height="96" loading="lazy" decoding="async" onerror="this.remove()">
+        <div class="pm-strip">Linha Dental Med</div>
+        <div class="pm-body">
+          <div class="pm-media">
+            <img src="/public/produtos/lipax-clean-card.jpg" data-pm-full="/public/produtos/lipax-clean.png" alt="Frasco de LIPAX CLEAN 1L — clique para ampliar" role="button" tabindex="0" width="810" height="1012" loading="lazy" decoding="async">
+          </div>
+          <div class="pm-content">
+            <div class="pm-name">LIPAX CLEAN</div>
+            <div class="pm-kicker">Manutenção de cuspideiras · Fragrância camomila</div>
+            <p class="pm-desc">Alta concentração enzimática para limpeza e remoção de incrustações em cuspideiras, pias e tubulações de consultórios. Previne entupimentos, mau odor e fermentações.</p>
+
+            <div class="pm-tags">
+              <span class="pm-tag">Amilase</span>
+              <span class="pm-tag">Protease</span>
+              <span class="pm-tag">Lipase-Carboidrase</span>
+              <span class="pm-tag">Xilanase</span>
+              <div class="pm-tags-nota">(Lipase, Celulase, Pectinase, Protease)</div>
+            </div>
+
+            <div class="pm-specs">
+              <div class="pm-spec">
+                <svg class="pm-spec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 10.5a6 6 0 0 1-12 0C6 9.5 12 3 12 3Z"></path></svg>
+                <div>
+                  <div class="pm-spec-k">Diluição</div>
+                  <div class="pm-spec-v">10% (1:10)</div>
+                </div>
+              </div>
+              <div class="pm-spec">
+                <svg class="pm-spec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+                <div>
+                  <div class="pm-spec-k">Aplicação</div>
+                  <div class="pm-spec-v">Final do turno</div>
+                </div>
+              </div>
+              <div class="pm-spec">
+                <svg class="pm-spec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v6.5L4.5 18A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-3L14 8.5V2"></path><path d="M8 2h8"></path><path d="M7.5 15h9"></path></svg>
+                <div>
+                  <div class="pm-spec-k">pH</div>
+                  <div class="pm-spec-v">6,0 – 8,0</div>
+                </div>
+              </div>
+              <div class="pm-spec">
+                <svg class="pm-spec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path><path d="M8 3v4"></path><path d="M16 3v4"></path></svg>
+                <div>
+                  <div class="pm-spec-k">Validade</div>
+                  <div class="pm-spec-v">18 meses</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pm-btn-wrap">
+              <a class="pm-btn" href="#cadastro">Solicitar informações</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════ LINHAS ═══════════════════════ -->
+<section class="linhas" id="linhas">
+  <div class="sec-in">
+    <div class="linhas-header">
+      <h2>As enzimas certas para cada etapa da higienização</h2>
+    </div>
+
+    <div class="dm-grid">
+
+      <article class="dm-card dm-card--enzyme">
+        <div class="dm-media">
+          <img src="/public/enzimas/lipax-enzyme-ilustra.png" alt="LIPAX ENZYME" loading="lazy" decoding="async">
+        </div>
+        <div class="dm-body">
+          <div class="dm-kicker">LIPAX ENZYME</div>
+          <div class="dm-specs">
+            <div class="dm-spec dm-spec--enzimas">6 enzimas: Amilase · Protease · Lipase-Carboidrase (Lipase, Celulase, Pectinase, Protease)</div>
+            <div class="dm-spec">Diluição 0,2-0,5% · Imersão 10 min</div>
+            <div class="dm-spec">Manual e lavadoras ultrassônicas</div>
+            <div class="dm-spec">Embalagens: 500 mL · 1 L · 5 L</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="dm-card dm-card--clean">
+        <div class="dm-media">
+          <img src="/public/enzimas/lipax-clean-ilustra.png" alt="LIPAX CLEAN" loading="lazy" decoding="async">
+        </div>
+        <div class="dm-body">
+          <div class="dm-kicker">LIPAX CLEAN</div>
+          <div class="dm-specs">
+            <div class="dm-spec dm-spec--enzimas">7 enzimas: Amilase · Protease · Lipase-Carboidrase (Lipase, Celulase, Pectinase, Protease) · Xilanase</div>
+            <div class="dm-spec">Diluição 10% · Aplicar ao final do turno</div>
+            <div class="dm-spec">Uso regular para resultados prolongados</div>
+            <div class="dm-spec">Embalagens: 500 mL · 1 L · 5 L</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="dm-cta-wrap">
+      <a href="#cadastro" class="dm-cta">Quero ser distribuidor</a>
+    </div>
+  </div>
+</section>
+
+<section class="offer" id="oferta">
+  <div class="sec-in">
+    <div class="offer-header reveal">
+      <span class="sec-tag" style="color:var(--orange);">Escolha seu próximo passo</span>
+      <h2>Uma parceria pensada para crescer junto com sua região.</h2>
+      <p>Você entra com o relacionamento local. A Care Systems entrega produto, tecnologia e suporte para transformar interesse em recorrência.</p>
+    </div>
+    <div class="offer-grid">
+      <article class="offer-card reveal"><h3>Conhecer a linha</h3><p>Para profissionais e empresas que querem entender onde a tecnologia enzimática se encaixa.</p><div class="offer-price">Materiais técnicos</div><ul class="offer-list"><li>Apresentação dos produtos</li><li>Fichas técnicas e aplicações</li><li>Orientação inicial da equipe</li></ul><a class="offer-btn" href="#produtos">Ver produtos</a></article>
+      <article class="offer-card reveal"><h3>Ser distribuidor</h3><p>Para quem quer representar a Care Systems e desenvolver uma carteira regional.</p><div class="offer-price">Condições personalizadas</div><ul class="offer-list"><li>Suporte comercial e técnico</li><li>Portfólio com demanda recorrente</li><li>Atendimento direto da fábrica</li></ul><a class="offer-btn" href="#cadastro">Quero ser distribuidor</a></article>
+      <article class="offer-card reveal"><h3>Expandir a operação</h3><p>Para distribuidores que querem ampliar mix, cobertura e presença no mercado de saúde.</p><div class="offer-price">Fale com nossa equipe</div><ul class="offer-list"><li>Mapeamento de oportunidade</li><li>Novas linhas e aplicações</li><li>Plano de expansão regional</li></ul><a class="offer-btn" href="#cadastro">Conversar com a equipe</a></article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════ DIFERENCIAIS ═══════════════════════ -->
+<section class="diferenciais" id="diferenciais">
+  <div class="sec-in">
+    <div class="dif-header">
+      <span class="sec-tag">Por que Care Systems</span>
+      <h2>Gatilhos que provam a diferença enzimática</h2>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card">
+        <div class="dif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><circle cx="5" cy="5" r="2"></circle><circle cx="19" cy="5" r="2"></circle><circle cx="5" cy="19" r="2"></circle><circle cx="19" cy="19" r="2"></circle><path d="m6.5 6.5 3.2 3.2"></path><path d="m17.5 6.5-3.2 3.2"></path><path d="m6.5 17.5 3.2-3.2"></path><path d="m17.5 17.5-3.2-3.2"></path></svg></div>
+
+        <div class="dif-title">Tecnologia Enzimática Real</div>
+        <div class="dif-text">Formulação com atividade enzimática comprovada em laudo técnico. Enzimas desenvolvidas desde a base - do invólucro à formulação.</div>
+      </div>
+      <div class="dif-card dif-card--destaque">
+        <div class="dif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 4 13c0-6 8-9 16-9 0 8-3 16-9 16Z"></path><path d="M4 21c2-6 6-9 11-11"></path></svg></div>
+
+        <div class="dif-title">Biodegradável e Sustentável</div>
+        <div class="dif-text">Atende à agenda ESDG. Produtos ambientalmente corretos, sem geração de resíduos tóxicos. Atende à agenda ESDG.</div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 8-8 8s-8-3-8-8 3.5-9 8-11c4.5 2 8 6 8 11Z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
+
+        <div class="dif-title">Seguro sem EPI obrigatório</div>
+        <div class="dif-text">Não corrosivo, não contaminante, não classificado como desinfetante. Manuseio seguro sem necessidade de equipamento de proteção individual.</div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h4v3H9z"></path><path d="M8 7h6a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3Z"></path><path d="M5 12h12"></path><path d="M18 5h2"></path><path d="M18 8h3"></path></svg></div>
+
+        <div class="dif-title">Eliminação de Odores Imediata</div>
+        <div class="dif-text">A hidrólise enzimática elimina a fonte do odor - não apenas mascara. Resultados duradouros com uso regular preventivo.</div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18Z"></path></svg></div>
+
+        <div class="dif-title">100% Brasileira</div>
+        <div class="dif-text">Empresa nacional com parceria com UFLA e ESALQ/USP. Tecnologia própria, procedência garantida e compromisso com inovação nacional.</div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 2.4 2.1 3.1-.5 1 3 2.8 1.5-1.1 3 1.1 3-2.8 1.5-1 3-3.1-.5L12 22l-2.4-2.1-3.1.5-1-3L2.7 16l1.1-3-1.1-3 2.8-1.5 1-3 3.1.5Z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
+
+        <div class="dif-title">ANVISA Regularizado</div>
+        <div class="dif-text">Produtos notificados (nº 361320051) e fabricados conforme RDC 59/2010 e RDC 703/2022. Conformidade total com as normas sanitárias brasileiras.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ DISTRIBUIDORES + MAPA ═══════════════════════ -->
+<!-- ═══════════════════════ PARCEIROS · CARROSSEL DE LOGOS ═══════════════════════ -->
+<section class="parceiros-marquee" aria-label="Empresas parceiras Care Systems">
+  <div class="sec-in parceiros-marquee-header">
+    <span class="sec-tag">Quem já usa</span>
+    <h2>Empresas que confiam na Care Systems</h2>
+  </div>
+  <div class="parceiros-marquee-viewport">
+    <div class="parceiros-marquee-track">
+      <div class="parceiros-marquee-group">
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/apetiti.png" alt="Apetit Serviços de Alimentação" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/casa-quattro.png" alt="Casa Quattro Construção e Acabamento" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/catuai.png" alt="Catuaí Shopping Londrina" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/coluna-de-fogo.png" alt="Coluna de Fogo Pizzaria" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/dental-avila.png" alt="Dental Ávila" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/destro.png" alt="Destro Acabamentos" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/guri-sorverte.png" alt="Guri Sorvetes" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/izzi-sabor-e-pronto.png" alt="Izzi Sabor e Pronto" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/laska-amenites.png" alt="Laska Amenities" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/pizza-e-pizza.png" alt="Pizza & Pizza Pizzaria e Hamburgueria" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/robertos.png" alt="Roberto's" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/sergipe.png" alt="TrulyNolen Sergipe – Controle de Pragas e Sanitização" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/supermercados-bomdia.png" alt="Supermercados Bom Dia" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/tikck-titos.png" alt="Tick Titos" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/x-prime.png" alt="X-Prime Academia" loading="lazy" width="947" height="466"></div>
+      </div>
+      <div class="parceiros-marquee-group" aria-hidden="true">
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/apetiti.png" alt="Apetit Serviços de Alimentação" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/casa-quattro.png" alt="Casa Quattro Construção e Acabamento" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/catuai.png" alt="Catuaí Shopping Londrina" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/coluna-de-fogo.png" alt="Coluna de Fogo Pizzaria" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/dental-avila.png" alt="Dental Ávila" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/destro.png" alt="Destro Acabamentos" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/guri-sorverte.png" alt="Guri Sorvetes" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/izzi-sabor-e-pronto.png" alt="Izzi Sabor e Pronto" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/laska-amenites.png" alt="Laska Amenities" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/pizza-e-pizza.png" alt="Pizza & Pizza Pizzaria e Hamburgueria" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/robertos.png" alt="Roberto's" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/sergipe.png" alt="TrulyNolen Sergipe – Controle de Pragas e Sanitização" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/supermercados-bomdia.png" alt="Supermercados Bom Dia" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/tikck-titos.png" alt="Tick Titos" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/x-prime.png" alt="X-Prime Academia" loading="lazy" width="947" height="466"></div>
+      </div>
+      <div class="parceiros-marquee-group" aria-hidden="true">
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/apetiti.png" alt="Apetit Serviços de Alimentação" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/casa-quattro.png" alt="Casa Quattro Construção e Acabamento" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/catuai.png" alt="Catuaí Shopping Londrina" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/coluna-de-fogo.png" alt="Coluna de Fogo Pizzaria" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/dental-avila.png" alt="Dental Ávila" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/destro.png" alt="Destro Acabamentos" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/guri-sorverte.png" alt="Guri Sorvetes" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/izzi-sabor-e-pronto.png" alt="Izzi Sabor e Pronto" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/laska-amenites.png" alt="Laska Amenities" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/pizza-e-pizza.png" alt="Pizza & Pizza Pizzaria e Hamburgueria" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/robertos.png" alt="Roberto's" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/sergipe.png" alt="TrulyNolen Sergipe – Controle de Pragas e Sanitização" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/supermercados-bomdia.png" alt="Supermercados Bom Dia" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/tikck-titos.png" alt="Tick Titos" loading="lazy" width="947" height="466"></div>
+        <div class="parceiros-marquee-item"><img src="assets/parceiros/x-prime.png" alt="X-Prime Academia" loading="lazy" width="947" height="466"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="distribuidores" id="distribuidores">
+  <div class="sec-in">
+    <div class="distrib-header">
+      <span class="sec-tag">Parceiros oficiais</span>
+      <h2>Distribuidores Care Systems em SP e PR</h2>
+      <p>Parceiros selecionados que levam a tecnologia enzimática LIPAX até os profissionais de saúde.</p>
+    </div>
+    <div class="distrib-layout">
+      <div>
+        <div class="distrib-list">
+          <!-- fonte unica dos distribuidores: o markup carrega os dados e o mapa 2D
+               le daqui. A sede fica como antes no topo; as cidades sao os itens principais
+               com os clientes ocultos; ao clicar na cidade abre o menu para selecionar o cliente -->
+
+          <!-- SEDE CARE SYSTEMS (como era antes) -->
+          <div class="distrib-item sede" data-id="sede" data-uf="SP" data-sede="1" data-grupo="sede"
+               data-lat="-21.9686" data-lon="-46.7986" data-rotulo="Sede Care Systems" data-desvio="6" tabindex="0">
+            <div class="distrib-dot laranja"></div>
+            <div class="distrib-info">
+              <div class="distrib-nome">Care Systems Bio Enzymes - Sede</div>
+              <div class="distrib-cidade">São João da Boa Vista, SP</div>
+            </div>
+          </div>
+
+          <!-- CIDADE: Apucarana, PR -->
+          <div class="distrib-cidade-item" data-cidade-grupo="apucarana">
+            <button class="distrib-cidade-head" type="button" aria-expanded="false" aria-controls="cid-apucarana">
+              <span class="distrib-dot verde"></span>
+              <span class="distrib-info">
+                <span class="distrib-nome">Apucarana, PR</span>
+                <span class="distrib-sub">1 distribuidor parceiro</span>
+              </span>
+              <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+            </button>
+            <div class="distrib-cidade-body" id="cid-apucarana"><div>
+              <div class="distrib-clientes-lista">
+                <div class="distrib-clientes-label">Selecione o distribuidor:</div>
+                <div class="distrib-item" data-id="ice-apucarana" data-uf="PR" data-grupo="apucarana"
+                     data-lat="-23.5505" data-lon="-51.4608" data-dx="-1.5" data-dy="-1" data-rotulo="Apucarana" data-desvio="34">
+                  <button class="distrib-head distrib-cliente-head" type="button" aria-expanded="false" aria-controls="det-ice-apucarana">
+                    <span class="distrib-cliente-badge-dot"></span>
+                    <span class="distrib-info">
+                      <span class="distrib-nome">Dental ICE</span>
+                      <span class="distrib-cidade">Apucarana, PR</span>
+                    </span>
+                    <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+                  </button>
+                  <div class="distrib-det" id="det-ice-apucarana"><div>
+                    <dl class="distrib-dados">
+                      <dt>Endere&ccedil;o</dt><dd class="dd-endereco">Rua Dr. Nagib Daher, 1084 &ndash; Centro<br>Apucarana, PR &middot; CEP 86800-000</dd>
+                      <dt>Telefone</dt><dd class="dd-tel"><a href="tel:+5543996080462">(43) 99608-0462</a></dd>
+                      <dt>Horário</dt><dd>Segunda a sexta, das 8h &agrave;s 18h</dd>
+                      <dt>Instagram</dt><dd><a href="https://www.instagram.com/dentaliceapucarana/" target="_blank" rel="noopener">@dentaliceapucarana</a></dd>
+                    </dl>
+                  </div></div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+
+          <!-- CIDADE: Arapongas, PR -->
+          <div class="distrib-cidade-item" data-cidade-grupo="arapongas">
+            <button class="distrib-cidade-head" type="button" aria-expanded="false" aria-controls="cid-arapongas">
+              <span class="distrib-dot verde"></span>
+              <span class="distrib-info">
+                <span class="distrib-nome">Arapongas, PR</span>
+                <span class="distrib-sub">2 distribuidores parceiros</span>
+              </span>
+              <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+            </button>
+            <div class="distrib-cidade-body" id="cid-arapongas"><div>
+              <div class="distrib-clientes-lista">
+                <div class="distrib-clientes-label">Selecione o distribuidor:</div>
+                <div class="distrib-item" data-id="inga-arapongas" data-uf="PR" data-grupo="arapongas"
+                     data-lat="-23.4055" data-lon="-51.4327" data-dx="3.7" data-dy="-9.9" data-rotulo="Arapongas &middot; Ing&aacute;" data-desvio="8">
+                  <button class="distrib-head distrib-cliente-head" type="button" aria-expanded="false" aria-controls="det-inga-arapongas">
+                    <span class="distrib-cliente-badge-dot"></span>
+                    <span class="distrib-info">
+                      <span class="distrib-nome">Dental Ing&aacute;</span>
+                      <span class="distrib-cidade">Arapongas, PR</span>
+                    </span>
+                    <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+                  </button>
+                  <div class="distrib-det" id="det-inga-arapongas"><div>
+                    <dl class="distrib-dados">
+                      <dt>Endere&ccedil;o</dt><dd class="dd-endereco">R. Pinta Roxa, 73 &ndash; Vila Cascata<br>Arapongas, PR &middot; CEP 86701-460</dd>
+                      <dt>Telefone</dt><dd class="dd-tel"><a href="tel:+5543996894289">(43) 99689-4289</a></dd>
+                      <dt>Horário</dt><dd>08h &agrave;s 18h</dd>
+                      <dt>Instagram</dt><dd><a href="https://www.instagram.com/dentalinga/" target="_blank" rel="noopener">@dentalinga</a></dd>
+                    </dl>
+                  </div></div>
+                </div>
+                <div class="distrib-item" data-id="panacci-arapongas" data-uf="PR" data-grupo="arapongas"
+                     data-lat="-23.4057" data-lon="-51.4360" data-dx="-9" data-dy="-26" data-rotulo="Arapongas &middot; Panacci" data-desvio="0">
+                  <button class="distrib-head distrib-cliente-head" type="button" aria-expanded="false" aria-controls="det-panacci-arapongas">
+                    <span class="distrib-cliente-badge-dot"></span>
+                    <span class="distrib-info">
+                      <span class="distrib-nome">Dental Panacci</span>
+                      <span class="distrib-cidade">Arapongas, PR</span>
+                    </span>
+                    <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+                  </button>
+                  <div class="distrib-det" id="det-panacci-arapongas"><div>
+                    <dl class="distrib-dados">
+                      <dt>Endere&ccedil;o</dt><dd class="dd-endereco">R. Gar&ccedil;as, 1593 &ndash; T&eacute;rreo m&oacute;dulo 2 &ndash; Jardim Eldorado<br>Arapongas, PR &middot; CEP 86708-190</dd>
+                      <dt>Telefone</dt><dd class="dd-tel"><a href="tel:+5543999099877">(43) 99909-9877</a></dd>
+                      <dt>Horário</dt><dd>08h &agrave;s 18h</dd>
+                      <dt>Instagram</dt><dd><a href="https://www.instagram.com/panacci_prod.odontologicos/" target="_blank" rel="noopener">@panacci_prod.odontologicos</a></dd>
+                    </dl>
+                  </div></div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+
+          <!-- CIDADE: Assis, SP -->
+          <div class="distrib-cidade-item" data-cidade-grupo="assis">
+            <button class="distrib-cidade-head" type="button" aria-expanded="false" aria-controls="cid-assis">
+              <span class="distrib-dot verde"></span>
+              <span class="distrib-info">
+                <span class="distrib-nome">Assis, SP</span>
+                <span class="distrib-sub">1 distribuidor parceiro</span>
+              </span>
+              <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+            </button>
+            <div class="distrib-cidade-body" id="cid-assis"><div>
+              <div class="distrib-clientes-lista">
+                <div class="distrib-clientes-label">Selecione o distribuidor:</div>
+                <div class="distrib-item" data-id="dental-gc-assis" data-uf="SP" data-grupo="assis"
+                     data-lat="-22.6607" data-lon="-50.4124" data-rotulo="Assis">
+                  <button class="distrib-head distrib-cliente-head" type="button" aria-expanded="false" aria-controls="det-dental-gc-assis">
+                    <span class="distrib-cliente-badge-dot"></span>
+                    <span class="distrib-info">
+                      <span class="distrib-nome">Dental GC</span>
+                      <span class="distrib-cidade">Assis, SP</span>
+                    </span>
+                    <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+                  </button>
+                  <div class="distrib-det" id="det-dental-gc-assis"><div>
+                    <dl class="distrib-dados">
+                      <dt>Endere&ccedil;o</dt><dd class="dd-endereco">Rua Smith de Vasconcelos, 395 &ndash; Centro<br>Assis, SP &middot; CEP 19814-010</dd>
+                      <dt>Telefone</dt><dd class="dd-tel"><a href="tel:+5518998049997">(18) 99804-9997</a></dd>
+                      <dt>Horário</dt><dd>Segunda a sexta, das 08:00 &agrave;s 17:30</dd>
+                    </dl>
+                  </div></div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+
+          <!-- CIDADE: Guarapuava, PR -->
+          <div class="distrib-cidade-item" data-cidade-grupo="guarapuava">
+            <button class="distrib-cidade-head" type="button" aria-expanded="false" aria-controls="cid-guarapuava">
+              <span class="distrib-dot verde"></span>
+              <span class="distrib-info">
+                <span class="distrib-nome">Guarapuava, PR</span>
+                <span class="distrib-sub">1 distribuidor parceiro</span>
+              </span>
+              <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+            </button>
+            <div class="distrib-cidade-body" id="cid-guarapuava"><div>
+              <div class="distrib-clientes-lista">
+                <div class="distrib-clientes-label">Selecione o distribuidor:</div>
+                <div class="distrib-item" data-id="odonthomaz-guarapuava" data-uf="PR" data-grupo="guarapuava"
+                     data-lat="-25.3935" data-lon="-51.4562" data-rotulo="Guarapuava">
+                  <button class="distrib-head distrib-cliente-head" type="button" aria-expanded="false" aria-controls="det-odonthomaz-guarapuava">
+                    <span class="distrib-cliente-badge-dot"></span>
+                    <span class="distrib-info">
+                      <span class="distrib-nome">Dental Odonthomaz</span>
+                      <span class="distrib-cidade">Guarapuava, PR</span>
+                    </span>
+                    <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+                  </button>
+                  <div class="distrib-det" id="det-odonthomaz-guarapuava"><div>
+                    <dl class="distrib-dados">
+                      <dt>Unidade</dt><dd>Filial Centro-Oeste Paranaense</dd>
+                      <dt>Endere&ccedil;o</dt><dd class="dd-endereco">R. Vicente Machado, 1877 &ndash; Centro<br>Guarapuava, PR &middot; CEP 85010-260</dd>
+                      <dt>Telefone</dt><dd class="dd-tel"><a href="tel:+554236276051">(42) 3627-6051</a></dd>
+                      <dt>Horário</dt><dd>Segunda a sexta, das 8h &agrave;s 12h e das 14h &agrave;s 18h</dd>
+                      <dt>Site</dt><dd><a href="https://www.dentalodonthomaz.com.br" target="_blank" rel="noopener">dentalodonthomaz.com.br</a></dd>
+                    </dl>
+                  </div></div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+
+          <!-- CIDADE: Londrina, PR -->
+          <div class="distrib-cidade-item" data-cidade-grupo="londrina">
+            <button class="distrib-cidade-head" type="button" aria-expanded="false" aria-controls="cid-londrina">
+              <span class="distrib-dot verde"></span>
+              <span class="distrib-info">
+                <span class="distrib-nome">Londrina, PR</span>
+                <span class="distrib-sub">2 distribuidores parceiros</span>
+              </span>
+              <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+            </button>
+            <div class="distrib-cidade-body" id="cid-londrina"><div>
+              <div class="distrib-clientes-lista">
+                <div class="distrib-clientes-label">Selecione o distribuidor:</div>
+                <div class="distrib-item" data-id="classea-londrina" data-uf="PR" data-grupo="londrina"
+                     data-lat="-23.3175" data-lon="-51.1580" data-dx="3" data-rotulo="Classe A" data-desvio="4">
+                  <button class="distrib-head distrib-cliente-head" type="button" aria-expanded="false" aria-controls="det-classea-londrina">
+                    <span class="distrib-cliente-badge-dot"></span>
+                    <span class="distrib-info">
+                      <span class="distrib-nome">Dental Classe A</span>
+                      <span class="distrib-cidade">Londrina, PR</span>
+                    </span>
+                    <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+                  </button>
+                  <div class="distrib-det" id="det-classea-londrina"><div>
+                    <dl class="distrib-dados">
+                      <dt>Endere&ccedil;o</dt><dd class="dd-endereco">R. Goi&aacute;s, 1255 &ndash; Centro<br>Londrina, PR &middot; CEP 86020-410</dd>
+                      <dt>Telefone</dt><dd class="dd-tel"><a href="tel:+5543991740116">(43) 99174-0116</a></dd>
+                      <dt>Horário</dt><dd>Segunda a sexta, das 8h &agrave;s 18h<br>S&aacute;bado, das 8h &agrave;s 12h</dd>
+                      <dt>Instagram</dt><dd><a href="https://www.instagram.com/dentalclasse_a/" target="_blank" rel="noopener">@dentalclasse_a</a></dd>
+                    </dl>
+                  </div></div>
+                </div>
+                <div class="distrib-item" data-id="odonthomaz-londrina" data-uf="PR" data-grupo="londrina"
+                     data-lat="-23.3103" data-lon="-51.1628" data-dx="-1.6" data-dy="2" data-rotulo="Odonthomaz" data-desvio="16">
+                  <button class="distrib-head distrib-cliente-head" type="button" aria-expanded="false" aria-controls="det-odonthomaz-londrina">
+                    <span class="distrib-cliente-badge-dot"></span>
+                    <span class="distrib-info">
+                      <span class="distrib-nome">Dental Odonthomaz</span>
+                      <span class="distrib-cidade">Londrina, PR</span>
+                    </span>
+                    <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+                  </button>
+                  <div class="distrib-det" id="det-odonthomaz-londrina"><div>
+                    <dl class="distrib-dados">
+                      <dt>Unidade</dt><dd>Sede matriz</dd>
+                      <dt>Endere&ccedil;o</dt><dd class="dd-endereco">R. Camb&aacute;r&aacute;, 340 &ndash; Centro<br>Londrina, PR &middot; CEP 86010-530</dd>
+                      <dt>WhatsApp</dt><dd class="dd-tel"><a href="tel:+554398750339">(43) 9 9875-0339</a></dd>
+                      <dt>Horário</dt><dd>Segunda a sexta, das 8h &agrave;s 12h e das 14h &agrave;s 18h</dd>
+                      <dt>Site</dt><dd><a href="https://www.dentalodonthomaz.com.br" target="_blank" rel="noopener">dentalodonthomaz.com.br</a></dd>
+                    </dl>
+                  </div></div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+
+          <!-- CIDADE: Maringá, PR -->
+          <div class="distrib-cidade-item" data-cidade-grupo="maringa">
+            <button class="distrib-cidade-head" type="button" aria-expanded="false" aria-controls="cid-maringa">
+              <span class="distrib-dot verde"></span>
+              <span class="distrib-info">
+                <span class="distrib-nome">Maringá, PR</span>
+                <span class="distrib-sub">2 distribuidores parceiros</span>
+              </span>
+              <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+            </button>
+            <div class="distrib-cidade-body" id="cid-maringa"><div>
+              <div class="distrib-clientes-lista">
+                <div class="distrib-clientes-label">Selecione o distribuidor:</div>
+                <div class="distrib-item" data-id="dental-avila-maringa" data-uf="PR" data-grupo="maringa"
+                     data-lat="-23.3980" data-lon="-51.8970" data-rotulo="Dental &Aacute;vila" data-desvio="0">
+                  <button class="distrib-head distrib-cliente-head" type="button" aria-expanded="false" aria-controls="det-dental-avila-maringa">
+                    <span class="distrib-cliente-badge-dot"></span>
+                    <span class="distrib-info">
+                      <span class="distrib-nome">Dental &Aacute;vila</span>
+                      <span class="distrib-cidade">Maring&aacute;, PR</span>
+                    </span>
+                    <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+                  </button>
+                  <div class="distrib-det" id="det-dental-avila-maringa"><div>
+                    <dl class="distrib-dados">
+                      <dt>Endere&ccedil;o</dt><dd class="dd-endereco">Av. Franklin Delano Roosevelt, 3610<br>Maring&aacute;, PR</dd>
+                      <dt>Telefone</dt><dd class="dd-tel"><a href="tel:+554430235421">(44) 3023-5421</a> ou <a href="tel:+5544999128196">(44) 99912-8196</a></dd>
+                      <dt>E-mail</dt><dd><a href="mailto:terezinhaavila821@gmail.com">terezinhaavila821@gmail.com</a></dd>
+                      <dt>Instagram</dt><dd><a href="https://www.instagram.com/avila.dental/" target="_blank" rel="noopener">@avila.dental</a></dd>
+                    </dl>
+                  </div></div>
+                </div>
+                <div class="distrib-item" data-id="sudamais-maringa" data-uf="PR" data-grupo="maringa"
+                     data-lat="-23.4253" data-lon="-51.9401" data-rotulo="Suda Mais" data-desvio="0">
+                  <button class="distrib-head distrib-cliente-head" type="button" aria-expanded="false" aria-controls="det-sudamais-maringa">
+                    <span class="distrib-cliente-badge-dot"></span>
+                    <span class="distrib-info">
+                      <span class="distrib-nome">Suda Mais</span>
+                      <span class="distrib-cidade">Maring&aacute;, PR</span>
+                    </span>
+                    <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+                  </button>
+                  <div class="distrib-det" id="det-sudamais-maringa"><div>
+                    <dl class="distrib-dados">
+                      <dt>Endere&ccedil;o</dt><dd class="dd-endereco">Avenida Duque de Caxias, 251 &ndash; Zona 01<br>Maring&aacute;, PR &middot; CEP 87013-180</dd>
+                      <dt>Telefone</dt><dd class="dd-tel"><a href="tel:+5544991299706">(44) 99129-9706</a></dd>
+                      <dt>Hor&aacute;rio</dt><dd>Segunda a sexta, das 8h &agrave;s 18h</dd>
+                      <dt>Instagram</dt><dd><a href="https://www.instagram.com/sudamaisbeneficios/" target="_blank" rel="noopener">@sudamaisbeneficios</a></dd>
+                      <dt>Site</dt><dd><a href="https://sudamais.com.br/" target="_blank" rel="noopener">sudamais.com.br</a></dd>
+                    </dl>
+                  </div></div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+
+          <!-- CIDADE: Presidente Prudente, SP -->
+          <div class="distrib-cidade-item" data-cidade-grupo="prudente">
+            <button class="distrib-cidade-head" type="button" aria-expanded="false" aria-controls="cid-prudente">
+              <span class="distrib-dot verde"></span>
+              <span class="distrib-info">
+                <span class="distrib-nome">Presidente Prudente, SP</span>
+                <span class="distrib-sub">1 distribuidor parceiro</span>
+              </span>
+              <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+            </button>
+            <div class="distrib-cidade-body" id="cid-prudente"><div>
+              <div class="distrib-clientes-lista">
+                <div class="distrib-clientes-label">Selecione o distribuidor:</div>
+                <div class="distrib-item" data-id="odonthomaz-prudente" data-uf="SP" data-grupo="prudente"
+                     data-lat="-22.1256" data-lon="-51.3889" data-rotulo="Pres. Prudente" data-desvio="20">
+                  <button class="distrib-head distrib-cliente-head" type="button" aria-expanded="false" aria-controls="det-odonthomaz-prudente">
+                    <span class="distrib-cliente-badge-dot"></span>
+                    <span class="distrib-info">
+                      <span class="distrib-nome">Dental Odonthomaz</span>
+                      <span class="distrib-cidade">Presidente Prudente, SP</span>
+                    </span>
+                    <span class="distrib-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+                  </button>
+                  <div class="distrib-det" id="det-odonthomaz-prudente"><div>
+                    <dl class="distrib-dados">
+                      <dt>Unidade</dt><dd>Filial S&atilde;o Paulo</dd>
+                      <dt>Endere&ccedil;o</dt><dd class="dd-endereco">Avenida Brasil, 101B &ndash; Centro<br>Presidente Prudente, SP &middot; CEP 19010-030</dd>
+                      <dt>Telefone</dt><dd class="dd-tel"><a href="tel:+5518997672605">(18) 99767-2605</a></dd>
+                      <dt>Horário</dt><dd>Segunda a sexta, das 8h &agrave;s 12h e das 14h &agrave;s 18h</dd>
+                      <dt>Site</dt><dd><a href="https://www.dentalodonthomaz.com.br" target="_blank" rel="noopener">dentalodonthomaz.com.br</a></dd>
+                    </dl>
+                  </div></div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+        </div>
+        <div class="sede-card sede-card--mt">
+          <div class="sede-card-icon"></div>
+          <div>
+            <h4>Sede Care Systems Bio Enzymes</h4>
+            <p>Av. Dr. Durval Nicolau, 2353 - Bairro Alegre<br>São João da Boa Vista, SP - CEP 13874-788<br>caresystems@caresystems.com.br · marcio@caresystems.com.br</p>
+          </div>
+        </div>
+      </div>
+      <div class="mapa-wrapper">
+        <div class="mapa-label">Rede de Distribuidores · SP e PR</div>
+        <div class="mapa-2d" id="mapa2d" aria-hidden="true">
+          <svg class="mapa-2d-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa de São Paulo e Paraná com a sede e os distribuidores"></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="sec-in">
+    <div class="faq-head reveal">
+      <h2 class="faq-title">Dúvidas <span>Frequentes</span></h2>
+      <p class="faq-sub">Reunimos as respostas que ajudam a avaliar se a distribuição Care Systems faz sentido para o seu negócio.</p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <button class="faq-question" type="button" aria-expanded="true">
+          <span class="faq-q-txt">Quem pode ser distribuidor?</span>
+          <span class="faq-ico" aria-hidden="true"><span class="faq-ico-plus">+</span><svg class="faq-ico-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"></path></svg></span>
+        </button>
+        <div class="faq-answer"><div><p>Empresas e profissionais com atuação comercial no segmento odontológico, médico, hospitalar, agro ou de higiene profissional podem conversar com nossa equipe.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span class="faq-q-txt">Quais produtos posso distribuir?</span>
+          <span class="faq-ico" aria-hidden="true"><span class="faq-ico-plus">+</span><svg class="faq-ico-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"></path></svg></span>
+        </button>
+        <div class="faq-answer"><div><p>O destaque atual é a linha Dental Med, com LIPAX ENZYME para instrumentais e LIPAX CLEAN para cuspideiras e tubulações. Também existem outras linhas profissionais.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span class="faq-q-txt">A Care Systems oferece suporte?</span>
+          <span class="faq-ico" aria-hidden="true"><span class="faq-ico-plus">+</span><svg class="faq-ico-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"></path></svg></span>
+        </button>
+        <div class="faq-answer"><div><p>Sim. A parceria inclui orientação técnica e comercial, materiais de apoio e contato direto com a equipe para desenvolver sua região.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span class="faq-q-txt">Como recebo as condições comerciais?</span>
+          <span class="faq-ico" aria-hidden="true"><span class="faq-ico-plus">+</span><svg class="faq-ico-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"></path></svg></span>
+        </button>
+        <div class="faq-answer"><div><p>Preencha o cadastro com seus dados e a equipe analisará seu perfil e sua região para retornar com as condições adequadas ao seu cenário.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span class="faq-q-txt">Em quanto tempo terei retorno?</span>
+          <span class="faq-ico" aria-hidden="true"><span class="faq-ico-plus">+</span><svg class="faq-ico-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"></path></svg></span>
+        </button>
+        <div class="faq-answer"><div><p>O compromisso informado pela Care Systems é de retorno da equipe comercial em até 24 horas.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CADASTRO ═══════════════════════ -->
+<section id="cadastro">
+  <div style="position:absolute;inset:0;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpolygon points='30,2 56,16 56,44 30,58 4,44 4,16' fill='none' stroke='%233AB795' stroke-width='0.6' opacity='0.1'/%3E%3C/svg%3E&quot;);background-size:60px 52px;pointer-events:none;"></div>
+  <div class="sec-in" style="position:relative;z-index:1;">
+    <div class="cadastro-grid cad-grid-in" >
+
+      <!-- LEFT: copy -->
+      <div>
+        <p class="sec-tag">Seja um distribuidor</p>
+        <h2 class="cad-title">Porque Cuidar<br>é <span class="cad-title-lime">Revolucionar!</span></h2>
+        <p class="cad-lead">Leve a tecnologia enzimática da Care Systems para sua região. Entre em contato com nossa equipe e descubra como distribuir os produtos LIPAX ENZYME e LIPAX CLEAN.</p>
+        <div class="cad-bullets">
+          <div class="cad-bullet">
+            <div class="cad-bullet-ico">✓</div>
+            <span class="cad-bullet-txt">Retorno da equipe comercial em até 24h</span>
+          </div>
+          <div class="cad-bullet">
+            <div class="cad-bullet-ico">✓</div>
+            <span class="cad-bullet-txt">Produtos com ANVISA · pH neutro · biodegradáveis</span>
+          </div>
+          <div class="cad-bullet">
+            <div class="cad-bullet-ico">✓</div>
+            <span class="cad-bullet-txt">Suporte técnico e comercial completo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: formulário de cadastro 3 etapas -->
+      <div>
+        <div class="cad-card">
+          <!-- progress bar -->
+          <div style="background:#f0f0f0;height:4px;">
+            <div id="prog-bar" style="height:4px;background:linear-gradient(90deg,var(--green-lt),var(--orange));border-radius:2px;transition:width .4s;width:33%;"></div>
+          </div>
+          <div class="cad-form">
+            <div id="step-label" class="cad-step-tag">Etapa 1 de 3</div>
+            <h3 id="step-title" class="cad-step-title">Seus dados de contato</h3>
+
+            <!-- ETAPA 1 -->
+            <div id="f-step1">
+              <div class="cad-fields">
+                <div>
+                  <label class="cad-label">Nome completo *</label>
+                  <input id="f-nome" type="text" placeholder="Seu nome" required
+                    class="cad-input"
+                    onfocus="this.style.borderColor='var(--green-lt)'" onblur="this.style.borderColor='var(--line)'">
+                </div>
+                <div>
+                  <label class="cad-label">WhatsApp *</label>
+                  <input id="f-wapp" type="tel" placeholder="(00) 00000-0000" required
+                    class="cad-input"
+                    onfocus="this.style.borderColor='var(--green-lt)'" onblur="this.style.borderColor='var(--line)'">
+                </div>
+                <div>
+                  <label class="cad-label">E-mail</label>
+                  <input id="f-email" type="email" placeholder="seuemail@empresa.com"
+                    class="cad-input"
+                    onfocus="this.style.borderColor='var(--green-lt)'" onblur="this.style.borderColor='var(--line)'">
+                </div>
+              </div>
+              <button class="cta-button cad-btn cad-btn--full" onclick="nextStep(2)"  onmouseover="this.style.background='var(--green-lt)'" onmouseout="this.style.background='var(--green-mid)'">Continuar →</button>
+            </div>
+
+            <!-- ETAPA 2 -->
+            <div id="f-step2" style="display:none;">
+              <div class="cad-fields">
+                <div>
+                  <label class="cad-label">Nome da empresa *</label>
+                  <input id="f-empresa" type="text" placeholder="Razão social ou nome fantasia" required
+                    class="cad-input"
+                    onfocus="this.style.borderColor='var(--green-lt)'" onblur="this.style.borderColor='var(--line)'">
+                </div>
+                <div>
+                  <label class="cad-label">CNPJ *</label>
+                  <input id="f-cnpj" type="text" placeholder="00.000.000/0000-00" required
+                    class="cad-input"
+                    onfocus="this.style.borderColor='var(--green-lt)'" onblur="this.style.borderColor='var(--line)'">
+                </div>
+                <div class="cad-row">
+                  <div>
+                    <label class="cad-label">Cidade *</label>
+                    <input id="f-cidade" type="text" placeholder="Sua cidade" required
+                      class="cad-input"
+                      onfocus="this.style.borderColor='var(--green-lt)'" onblur="this.style.borderColor='var(--line)'">
+                  </div>
+                  <div>
+                    <label class="cad-label">Estado *</label>
+                    <select id="f-estado" required
+                      class="cad-select"
+                      onfocus="this.style.borderColor='var(--green-lt)'" onblur="this.style.borderColor='var(--line)'">
+                      <option value="">UF</option>
+                      <option>PR</option><option>SP</option><option>SC</option><option>RS</option>
+                      <option>MG</option><option>RJ</option><option>GO</option><option>MS</option>
+                      <option>MT</option><option>BA</option><option>PE</option><option>CE</option>
+                      <option>Outro</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="cad-actions">
+                <button onclick="nextStep(1)" class="cad-btn-back">← Voltar</button>
+                <button class="cta-button cad-btn cad-btn--grow" onclick="nextStep(3)"  onmouseover="this.style.background='var(--green-lt)'" onmouseout="this.style.background='var(--green-mid)'">Continuar →</button>
+              </div>
+            </div>
+
+            <!-- ETAPA 3 -->
+            <div id="f-step3" style="display:none;">
+              <div class="cad-resumo">
+                <p class="cad-resumo-tag">Confirme seus dados</p>
+                <div id="f-resumo" class="cad-resumo-txt"></div>
+              </div>
+              <div>
+                <label class="cad-label">Interesse principal</label>
+                <select id="f-interesse"
+                  class="cad-select cad-select--mb">
+                  <option>LIPAX ENZYME - instrumentais odontológicos</option>
+                  <option>LIPAX CLEAN - cuspideiras e tubulações</option>
+                  <option>Ambos os produtos</option>
+                  <option>Linha Profissional (ENZI POWER / ENZI FORCE)</option>
+                </select>
+              </div>
+              <div class="cad-actions cad-actions--flush">
+                <button onclick="nextStep(2)" class="cad-btn-back">← Voltar</button>
+                <button id="f-submit" class="cta-button cad-btn cad-btn--grow cad-btn--orange" onclick="submitForm()" >Enviar solicitação</button>
+              </div>
+              <p class="cad-submit-err" id="f-erro" hidden></p>
+            </div>
+
+            <!-- SUCESSO -->
+            <div id="f-success" class="cad-done">
+              <div class="cad-done-ico"></div>
+              <h3 class="cad-done-title">Solicitação enviada!</h3>
+              <p class="cad-done-txt">Nossa equipe comercial entrará em contato via WhatsApp em até <strong>24 horas</strong>.</p>
+              <p class="cad-done-sub">caresystems@caresystems.com.br</p>
+            </div>
+
+            <p class="cad-privacy">Seus dados são confidenciais e não compartilhados com terceiros.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ── envio de lead: um POST so, mesmo payload para os dois formularios
+   da pagina (hero e #cadastro). O n8n distingue pela chave "origem". ── */
+var CS_LEAD_WEBHOOK = 'https://n8n.qozt.com.br/webhook/f71723ab-52b8-4f07-9a11-ba0c2be71578';
+function csEnviarLead(dados){
+  var ctrl = ('AbortController' in window) ? new AbortController() : null;
+  var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 12000) : null;
+  return fetch(CS_LEAD_WEBHOOK, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dados),
+    signal: ctrl ? ctrl.signal : undefined
+  }).then(function(res){
+    if(timer) clearTimeout(timer);
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    return res;
+  }, function(err){
+    if(timer) clearTimeout(timer);
+    throw err;
+  });
+}
+
+/* ── HERO CARE SYSTEMS (form em card, 5 etapas + rotação + menu) ── */
+(function(){
+  var hero = document.querySelector('.cs-hero');
+  if(!hero) return;
+
+  var STEPS = [
+    { titulo:'Seus dados de contato', campos:['name','email'] },
+    { titulo:'Telefone e perfil',     campos:['phone','profile'] },
+    { titulo:'Dados da empresa',      campos:['company','cnpj'] },
+    { titulo:'Onde você atua',        campos:['city','uf'] },
+    { titulo:'Produto de interesse',  campos:['product'] }
+  ];
+  var TOTAL = STEPS.length;
+
+  var state = { passo:1, menuAberto:false, enviado:false, enviando:false, erroEnvio:'', erros:{},
+    name:'', email:'', phone:'', profile:'', company:'', cnpj:'', city:'', uf:'', product:'' };
+
+  function maskPhone(v){
+    var d = v.replace(/\D/g,'').slice(0,11);
+    if(d.length <= 2)  return d.length ? '(' + d : '';
+    if(d.length <= 6)  return '(' + d.slice(0,2) + ') ' + d.slice(2);
+    if(d.length <= 10) return '(' + d.slice(0,2) + ') ' + d.slice(2,6) + '-' + d.slice(6);
+    return '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7);
+  }
+  function maskCnpj(v){
+    var d = v.replace(/\D/g,'').slice(0,14), out = d.slice(0,2);
+    if(d.length > 2)  out += '.' + d.slice(2,5);
+    if(d.length > 5)  out += '.' + d.slice(5,8);
+    if(d.length > 8)  out += '/' + d.slice(8,12);
+    if(d.length > 12) out += '-' + d.slice(12);
+    return out;
+  }
+  function cnpjValido(v){
+    var d = v.replace(/\D/g,'');
+    if(d.length !== 14 || /^(\d)\1{13}$/.test(d)) return false;
+    var dv = function(len, pesos){
+      var s = 0;
+      for(var i=0;i<len;i++) s += Number(d[i]) * pesos[i];
+      var r = s % 11;
+      return r < 2 ? 0 : 11 - r;
+    };
+    return dv(12,[5,4,3,2,9,8,7,6,5,4,3,2]) === Number(d[12])
+        && dv(13,[6,5,4,3,2,9,8,7,6,5,4,3,2]) === Number(d[13]);
+  }
+
+  var REGRAS = {
+    name:    function(v){ return v.trim().length < 3 ? 'Digite seu nome completo.' : ''; },
+    email:   function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Informe um e-mail válido.'; },
+    phone:   function(v){ return v.replace(/\D/g,'').length < 10 ? 'Informe um telefone com DDD.' : ''; },
+    profile: function(v){ return v ? '' : 'Selecione o seu perfil.'; },
+    company: function(v){ return v.trim().length < 2 ? 'Informe o nome da empresa.' : ''; },
+    cnpj:    function(v){ return cnpjValido(v) ? '' : 'CNPJ inválido — confira os números.'; },
+    city:    function(v){ return v.trim().length < 2 ? 'Informe a sua cidade.' : ''; },
+    uf:      function(v){ return v ? '' : 'Selecione a UF.'; },
+    product: function(v){ return v ? '' : 'Selecione o produto de interesse.'; }
+  };
+
+  var elEtapa  = hero.querySelector('#cs-etapa');
+  var elTitulo = hero.querySelector('#cs-steptitle');
+  var elProg   = hero.querySelector('#cs-prog');
+  var elBotao  = hero.querySelector('#cs-submit');
+  var elVoltar = hero.querySelector('#cs-back');
+  var elCorpo  = hero.querySelector('#cs-card-body');
+  var elFeito  = hero.querySelector('#cs-done');
+  var elMenu   = hero.querySelector('#cs-menu');
+  var elErroEnvio = hero.querySelector('#cs-submit-err');
+
+  function campoEl(nome){ return hero.querySelector('[data-cs-field="' + nome + '"]'); }
+  function erroEl(nome){ return hero.querySelector('[data-cs-err="' + nome + '"]'); }
+
+  function render(){
+    var passo = STEPS[state.passo - 1];
+
+    elEtapa.textContent  = 'Etapa ' + state.passo + ' de ' + TOTAL;
+    elTitulo.textContent = passo.titulo;
+    elProg.style.width   = (state.passo / TOTAL * 100) + '%';
+
+    Array.prototype.forEach.call(hero.querySelectorAll('[data-cs-panel]'), function(p){
+      p.hidden = Number(p.getAttribute('data-cs-panel')) !== state.passo;
+    });
+
+    elBotao.textContent = state.enviando ? 'Enviando...' : (state.passo === TOTAL ? 'Enviar solicitação' : 'Continuar →');
+    elBotao.disabled = state.enviando;
+    elVoltar.hidden = state.passo === 1;
+
+    elErroEnvio.textContent = state.erroEnvio;
+    elErroEnvio.classList.toggle('is-on', !!state.erroEnvio);
+
+    for (var nome in REGRAS) {
+      var input = campoEl(nome), err = erroEl(nome);
+      if(!input || !err) continue;
+      var msg = state.erros[nome] || '';
+      err.textContent = msg;
+      err.classList.toggle('is-on', !!msg);
+      input.classList.toggle('is-err', !!msg);
+    }
+
+    elCorpo.hidden = state.enviado;
+    elFeito.hidden = !state.enviado;
+    elMenu.hidden  = !state.menuAberto;
+  }
+
+  function avancar(){
+    var passo = STEPS[state.passo - 1], erros = {}, temErro = false;
+    passo.campos.forEach(function(nome){
+      var msg = REGRAS[nome](state[nome]);
+      if(msg){ erros[nome] = msg; temErro = true; }
+    });
+    state.erros = erros;
+    if(temErro){ render(); focar(); return; }
+    if(state.passo === TOTAL){ enviar(); return; }
+    state.passo++;
+    render();
+    focar();
+  }
+  function textoSelecionado(nome){
+    var el = campoEl(nome);
+    var opt = el && el.options && el.options[el.selectedIndex];
+    return opt ? opt.textContent.trim() : (el ? el.value : '');
+  }
+  function enviar(){
+    state.enviando = true;
+    state.erroEnvio = '';
+    render();
+    csEnviarLead({
+      origem: 'hero',
+      nome: state.name,
+      email: state.email,
+      telefone: state.phone,
+      perfil: textoSelecionado('profile'),
+      empresa: state.company,
+      cnpj: state.cnpj,
+      cidade: state.city,
+      uf: state.uf,
+      produto: textoSelecionado('product'),
+      enviado_em: new Date().toISOString(),
+      pagina: location.href
+    }).then(function(){
+      state.enviando = false;
+      state.enviado = true;
+      render();
+    }).catch(function(){
+      state.enviando = false;
+      state.erroEnvio = 'Não foi possível enviar agora. Confira sua conexão e tente de novo.';
+      render();
+      focar();
+    });
+  }
+  function voltar(){
+    if(state.passo > 1) state.passo--;
+    state.erros = {};
+    render();
+    focar();
+  }
+  function focar(){
+    var passo = STEPS[state.passo - 1];
+    var alvo = passo.campos.map(campoEl).filter(function(el){
+      return el && (state.erros[el.getAttribute('data-cs-field')] || !el.value);
+    })[0] || campoEl(passo.campos[0]);
+    if(alvo && alvo.offsetParent !== null) alvo.focus();
+  }
+
+  Array.prototype.forEach.call(hero.querySelectorAll('[data-cs-field]'), function(el){
+    var nome = el.getAttribute('data-cs-field');
+    el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', function(){
+      var v = el.value;
+      if(nome === 'phone') v = maskPhone(v);
+      if(nome === 'cnpj')  v = maskCnpj(v);
+      if(el.value !== v) el.value = v;
+      state[nome] = v;
+      if(state.erros[nome]){ delete state.erros[nome]; render(); }
+    });
+    el.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); avancar(); }
+    });
+  });
+
+  elBotao.addEventListener('click', function(e){ e.preventDefault(); avancar(); });
+  elVoltar.addEventListener('click', function(e){ e.preventDefault(); voltar(); });
+
+  /* menu mobile */
+  Array.prototype.forEach.call(hero.querySelectorAll('[data-cs-menu]'), function(b){
+    b.addEventListener('click', function(){ state.menuAberto = !state.menuAberto; render(); });
+  });
+
+
+  render();
+})();
+
+/* ── MODAL FORM (IDs f-*) ── */
+function nextStep(n) {
+  [1,2,3].forEach(function(i){document.getElementById('f-step'+i).style.display='none';});
+  document.getElementById('f-step'+n).style.display='block';
+  var labels = ['','Etapa 1 de 3','Etapa 2 de 3','Etapa 3 de 3 - Confirmação'];
+  var titles = ['','Seus dados de contato','Dados da empresa','Revise e envie'];
+  var widths  = ['','33%','66%','100%'];
+  document.getElementById('step-label').textContent = labels[n];
+  document.getElementById('step-title').textContent = titles[n];
+  document.getElementById('prog-bar').style.width = widths[n];
+  if(n===3){
+    var r = document.getElementById('f-resumo');
+    r.innerHTML =
+      '<strong>Nome:</strong> '+document.getElementById('f-nome').value+'<br>'+
+      '<strong>WhatsApp:</strong> '+document.getElementById('f-wapp').value+'<br>'+
+      '<strong>Empresa:</strong> '+document.getElementById('f-empresa').value+'<br>'+
+      '<strong>CNPJ:</strong> '+document.getElementById('f-cnpj').value+'<br>'+
+      '<strong>Cidade/UF:</strong> '+document.getElementById('f-cidade').value+' - '+document.getElementById('f-estado').value;
+  }
+}
+/* required ja esta no HTML de cada campo (nome/whatsapp/empresa/cnpj/
+   cidade/estado); checkValidity funciona por input mesmo sem <form>,
+   entao nao duplica as regras do hero so para bloquear o vazio */
+function validarCadastro(){
+  var campos = ['f-nome','f-wapp','f-empresa','f-cnpj','f-cidade','f-estado'];
+  for (var i = 0; i < campos.length; i++){
+    var el = document.getElementById(campos[i]);
+    if (el && !el.checkValidity()){ el.reportValidity(); el.focus(); return false; }
+  }
+  return true;
+}
+function submitForm() {
+  if (!validarCadastro()) return;
+  var btn = document.getElementById('f-submit');
+  var erro = document.getElementById('f-erro');
+  erro.hidden = true;
+  btn.textContent = 'Enviando...'; btn.disabled = true;
+  csEnviarLead({
+    origem: 'cadastro',
+    nome: document.getElementById('f-nome').value.trim(),
+    email: document.getElementById('f-email').value.trim(),
+    telefone: document.getElementById('f-wapp').value.trim(),
+    perfil: '',
+    empresa: document.getElementById('f-empresa').value.trim(),
+    cnpj: document.getElementById('f-cnpj').value.trim(),
+    cidade: document.getElementById('f-cidade').value.trim(),
+    uf: document.getElementById('f-estado').value,
+    produto: document.getElementById('f-interesse').value,
+    enviado_em: new Date().toISOString(),
+    pagina: location.href
+  }).then(function(){
+    [1,2,3].forEach(function(i){document.getElementById('f-step'+i).style.display='none';});
+    document.getElementById('f-success').style.display='block';
+    document.getElementById('prog-bar').style.width='100%';
+  }).catch(function(){
+    btn.textContent = 'Enviar solicitação'; btn.disabled = false;
+    erro.textContent = 'Não foi possível enviar agora. Confira sua conexão e tente de novo.';
+    erro.hidden = false;
+  });
+}
+document.querySelectorAll('.faq-question').forEach(function(button){
+  button.addEventListener('click',function(){
+    var item=button.closest('.faq-item');
+    item.classList.toggle('open');
+    button.setAttribute('aria-expanded',item.classList.contains('open')?'true':'false');
+  });
+});
+var revealObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target);}
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(element){revealObserver.observe(element);});
+
+/* ── LIGHTBOX das fotos de produto: abre o PNG em qualidade cheia ── */
+(function(){
+  var alvos = document.querySelectorAll('.pm-media img[data-pm-full]');
+  if(!alvos.length) return;
+  var overlay = null, origem = null;
+
+  function fechar(){
+    if(!overlay) return;
+    overlay.remove();
+    overlay = null;
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKey);
+    if(origem) origem.focus();
+  }
+  function onKey(e){
+    if(e.key === 'Escape'){ e.preventDefault(); fechar(); }
+    if(e.key === 'Tab'){ e.preventDefault(); }   /* prende o foco no overlay */
+  }
+  function abrir(img){
+    if(overlay) return;
+    origem = img;
+    overlay = document.createElement('div');
+    overlay.className = 'pm-lb';
+    overlay.setAttribute('role','dialog');
+    overlay.setAttribute('aria-modal','true');
+    overlay.setAttribute('aria-label', img.getAttribute('alt') || 'Foto do produto');
+
+    var cheia = document.createElement('img');
+    cheia.src = img.getAttribute('data-pm-full');
+    cheia.alt = img.getAttribute('alt') || '';
+
+    var x = document.createElement('button');
+    x.type = 'button';
+    x.className = 'pm-lb-x';
+    x.setAttribute('aria-label','Fechar');
+    x.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+
+    overlay.appendChild(cheia);
+    overlay.appendChild(x);
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    x.addEventListener('click', fechar);
+    overlay.addEventListener('click', function(e){ if(e.target === overlay) fechar(); });
+    document.addEventListener('keydown', onKey);
+    x.focus();
+  }
+
+  Array.prototype.forEach.call(alvos, function(img){
+    img.addEventListener('click', function(){ abrir(img); });
+    img.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); abrir(img); }
+    });
+  });
+})();
+</script>
+
+<!-- ═══════════════════════ RODAPÉ ═══════════════════════ -->
+<footer>
+  <div class="footer-in">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img class="footer-logo-img" src="assets/logo-care-systems.png" alt="CARE SYSTEMS BIO ENZYMES">
+        </div>
+        <div class="footer-slogan">"Porque Cuidar é Revolucionar!"</div>
+        <div class="footer-addr">
+          Av. Dr. Durval Nicolau, 2353 - Bairro Alegre<br>
+          São João da Boa Vista, SP · CEP 13874-788<br>
+          <a class="footer-mail" href="mailto:caresystems@caresystems.com.br">caresystems@caresystems.com.br</a>
+        </div>
+        <div class="footer-dev">
+          <span class="footer-dev-label">Desenvolvido por:</span>
+          <img class="footer-dev-logo" src="assets/logo-op7.svg" alt="OP7" width="40" height="40" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Linhas</h4>
+        <ul>
+          <li><a href="#linhas">Odontológica</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Produtos</h4>
+        <ul>
+          <li><a href="#produtos">LIPAX ENZYME</a></li>
+          <li><a href="#produtos">LIPAX CLEAN</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#historia">Nossa História</a></li>
+          <li><a href="#distribuidores">Distribuidores</a></li>
+          <li><a href="https://caresystems.com.br" target="_blank">Site Oficial</a></li>
+          <li><a href="mailto:caresystems@caresystems.com.br">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Care Systems Bio Enzymes Ltda · CNPJ: 11.482.743/0002-42 · Todos os direitos reservados</p>
+      <div class="footer-tags">
+        <span class="footer-tag"><span class="footer-dot"></span>Sistemas operacionais</span>
+        <span class="footer-tag">ANVISA 361320051</span>
+        <span class="footer-tag">RDC 59/2010</span>
+        <span class="footer-tag">RDC 703/2022</span>
+        <span class="footer-tag">17 anos</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var container = document.querySelector('.video-sec .dotted-surface');
+  if(!container || !window.THREE) return;
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var scene = new THREE.Scene();
+  var rect = container.getBoundingClientRect();
+  var width = Math.max(1, Math.floor(rect.width));
+  var height = Math.max(1, Math.floor(rect.height));
+  var camera = new THREE.PerspectiveCamera(60, width / height, 1, 10000);
+  camera.position.set(0, 120, 1100);
+  camera.lookAt(0, 0, 0);
+
+  var renderer = new THREE.WebGLRenderer({alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(width, height);
+  renderer.setClearColor(0x005530, 0);
+  container.appendChild(renderer.domElement);
+
+  var amountX = 58;
+  var amountY = 64;
+  var separation = 28;
+  var positions = [];
+  var colors = [];
+  var pointColor = new THREE.Color('#A8D156');
+
+  for(var ix=0; ix<amountX; ix++){
+    for(var iy=0; iy<amountY; iy++){
+      positions.push(ix * separation - amountX * separation / 2, 0, iy * separation - amountY * separation / 2);
+      colors.push(pointColor.r, pointColor.g, pointColor.b);
+    }
+  }
+
+  var geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions,3));
+  geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors,3));
+  var material = new THREE.PointsMaterial({size:4,vertexColors:true,transparent:true,opacity:.48,sizeAttenuation:true});
+  var points = new THREE.Points(geometry, material);
+  points.rotation.x = -1.3;
+  scene.add(points);
+
+  var tick = 0;
+  var animationId = null;
+  function render(){
+    var position = geometry.getAttribute('position');
+    var values = position.array;
+    var index = 0;
+    for(var x=0; x<amountX; x++){
+      for(var y=0; y<amountY; y++){
+        var offset = index * 3;
+        values[offset + 1] = Math.sin((x + tick) * .25) * 22 + Math.sin((y + tick) * .38) * 18;
+        index++;
+      }
+    }
+    position.needsUpdate = true;
+    renderer.render(scene,camera);
+    if(!reducedMotion){
+      tick += .035;
+      animationId = requestAnimationFrame(render);
+    }
+  }
+  function resize(){
+    var next = container.getBoundingClientRect();
+    camera.aspect = Math.max(1,next.width) / Math.max(1,next.height);
+    camera.updateProjectionMatrix();
+    renderer.setSize(Math.max(1,next.width),Math.max(1,next.height));
+    render();
+  }
+  window.addEventListener('resize',resize);
+  render();
+})();
+</script>
+
+<script>
+(function(){
+  var canvas = document.getElementById('hero-shader-background');
+  if(!canvas) return;
+  var gl = canvas.getContext('webgl',{antialias:false,alpha:true,preserveDrawingBuffer:false});
+  if(!gl) return;
+
+  var vertexSource = 'attribute vec2 a_position; void main(){ gl_Position=vec4(a_position,0.0,1.0); }';
+  var fragmentSource = '\n+    precision highp float;\n+    uniform vec2 u_resolution;\n+    uniform float u_time;\n+    uniform vec3 u_colors[4];\n+    float hash21(vec2 p){ p=fract(p*vec2(234.34,435.345)); p+=dot(p,p+34.23); return fract(p.x*p.y); }\n+    float noise(vec2 p){ vec2 i=floor(p),f=fract(p); f=f*f*(3.0-2.0*f); return mix(mix(hash21(i),hash21(i+vec2(1.0,0.0)),f.x),mix(hash21(i+vec2(0.0,1.0)),hash21(i+vec2(1.0,1.0)),f.x),f.y); }\n+    float fbm(vec2 p){ float value=0.0,amp=.5; for(int i=0;i<5;i++){ value+=amp*noise(p); p=p*2.03+vec2(17.0,9.2); amp*=.5; } return value; }\n+    vec3 palette(float value){ value=clamp(value,0.0,1.0)*3.0; vec3 color=mix(u_colors[0],u_colors[1],smoothstep(0.0,1.0,clamp(value,0.0,1.0))); color=mix(color,u_colors[2],smoothstep(1.0,2.0,clamp(value,1.0,2.0))); return mix(color,u_colors[3],smoothstep(2.0,3.0,clamp(value,2.0,3.0))); }\n+    void main(){\n+      vec2 uv=gl_FragCoord.xy/u_resolution.xy;\n+      vec2 p=(gl_FragCoord.xy-.5*u_resolution.xy)/min(u_resolution.x,u_resolution.y);\n+      float time=u_time*.16;\n+      p+=.12*vec2(sin(time*.7),cos(time*.55));\n+      vec2 warp=vec2(fbm(p*1.45+time*.18),fbm(p*1.45-vec2(4.2,1.3)-time*.12))-.5;\n+      p+=warp*.42;\n+      float waves=fbm(p*2.15+vec2(time*.2,-time*.12));\n+      float glow=exp(-length(p-vec2(.2,-.18))*1.7);\n+      float value=clamp(waves*.72+glow*.3,0.0,1.0);\n+      vec3 color=palette(value);\n+      float vignette=1.0-smoothstep(.38,1.0,length(uv-.5))*.18;\n+      float grain=(hash21(gl_FragCoord.xy+time*20.0)-.5)*.025;\n+      gl_FragColor=vec4(clamp(color*vignette+grain,0.0,1.0),1.0);\n+    }';
+
+  fragmentSource = fragmentSource.replace(/\n\+/g, '\n');
+  function compile(type,source){
+    var shader=gl.createShader(type);
+    gl.shaderSource(shader,source);
+    gl.compileShader(shader);
+    if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){gl.deleteShader(shader);return null;}
+    return shader;
+  }
+  var vertex=compile(gl.VERTEX_SHADER,vertexSource);
+  var fragment=compile(gl.FRAGMENT_SHADER,fragmentSource);
+  if(!vertex||!fragment) return;
+  var program=gl.createProgram();
+  gl.attachShader(program,vertex);gl.attachShader(program,fragment);gl.linkProgram(program);
+  gl.deleteShader(vertex);gl.deleteShader(fragment);
+  if(!gl.getProgramParameter(program,gl.LINK_STATUS)){gl.deleteProgram(program);return;}
+  gl.useProgram(program);
+
+  var buffer=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  var position=gl.getAttribLocation(program,'a_position');
+  gl.enableVertexAttribArray(position);gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0);
+  var resolution=gl.getUniformLocation(program,'u_resolution');
+  var timeUniform=gl.getUniformLocation(program,'u_time');
+  var colorUniform=gl.getUniformLocation(program,'u_colors');
+  gl.uniform3fv(colorUniform,new Float32Array([
+    0.0039,0.3333,0.1882,
+    0.1137,0.5569,0.3020,
+    0.4588,0.8392,0.6118,
+    0.8235,0.9725,0.8784
+  ]));
+
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var start=performance.now();
+  var frame=0;
+  function resize(){
+    var rect=canvas.getBoundingClientRect();
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    var width=Math.max(1,Math.round(rect.width*dpr));
+    var height=Math.max(1,Math.round(rect.height*dpr));
+    if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;gl.viewport(0,0,width,height);}
+  }
+  function render(now){
+    frame=0;resize();
+    gl.uniform2f(resolution,canvas.width,canvas.height);
+    gl.uniform1f(timeUniform,(now-start)/1000);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    if(!reduced) frame=requestAnimationFrame(render);
+  }
+  window.addEventListener('resize',function(){resize();if(!frame)frame=requestAnimationFrame(render);});
+  render(performance.now());
+})();
+</script>
+
+<script>
+/* Acordeao de dois niveis dos distribuidores:
+   Nivel 1: Cidades (ao clicar, abre o menu para selecionar o cliente da regiao)
+   Nivel 2: Clientes (ao clicar, abre os dados detalhados daquele distribuidor)
+   Totalmente sincronizado com o mapa 2D. */
+(function(){
+  // 1. Controle das Cidades
+  var cidades = [].slice.call(document.querySelectorAll(".distrib-cidade-item"));
+  cidades.forEach(function(cidadeEl){
+    var head = cidadeEl.querySelector(".distrib-cidade-head");
+    if(!head) return;
+    head.addEventListener("click", function(){
+      var abrir = !cidadeEl.classList.contains("aberto");
+      cidades.forEach(function(c){
+        if(c !== cidadeEl) {
+          c.classList.remove("aberto");
+          var h = c.querySelector(".distrib-cidade-head");
+          if(h) h.setAttribute("aria-expanded", "false");
+        }
+      });
+      cidadeEl.classList.toggle("aberto", abrir);
+      head.setAttribute("aria-expanded", abrir ? "true" : "false");
+
+      var grupo = cidadeEl.dataset.cidadeGrupo;
+      if (window._selecionarMapa) {
+        window._selecionarMapa(abrir ? grupo : null);
+      }
+    });
+  });
+
+  // 2. Controle dos Clientes dentro de cada Cidade
+  var clientesHeads = [].slice.call(document.querySelectorAll(".distrib-clientes-lista .distrib-head"));
+  clientesHeads.forEach(function(b){
+    b.addEventListener("click", function(e){
+      e.stopPropagation();
+      var item = b.closest(".distrib-item") || b.parentNode;
+      var abrir = !item.classList.contains("aberto");
+      
+      // Fecha outros clientes na mesma cidade
+      var container = item.closest(".distrib-clientes-lista") || item.parentNode;
+      var irmaos = [].slice.call(container.querySelectorAll(".distrib-item"));
+      irmaos.forEach(function(o){
+        if(o !== item){
+          o.classList.remove("aberto");
+          var btn = o.querySelector(".distrib-head");
+          if(btn) btn.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      if(abrir){
+        item.classList.add("aberto");
+        b.setAttribute("aria-expanded", "true");
+      } else {
+        item.classList.remove("aberto");
+        b.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  // 3. Sincronizacao Mapa -> Lista de Cidades:
+  // Se o usuario clica em um pino no mapa, abre a cidade correspondente automaticamente
+  var observer = new MutationObserver(function(mutations){
+    mutations.forEach(function(m){
+      if(m.type === "attributes" && m.attributeName === "class"){
+        var target = m.target;
+        if(target.classList.contains("distrib-item") && target.classList.contains("is-selecionado")){
+          var cidadePai = target.closest(".distrib-cidade-item");
+          if(cidadePai && !cidadePai.classList.contains("aberto")){
+            cidades.forEach(function(c){
+              if(c !== cidadePai) {
+                c.classList.remove("aberto");
+                var h = c.querySelector(".distrib-cidade-head");
+                if(h) h.setAttribute("aria-expanded", "false");
+              }
+            });
+            cidadePai.classList.add("aberto");
+            var head = cidadePai.querySelector(".distrib-cidade-head");
+            if(head) head.setAttribute("aria-expanded", "true");
+          }
+        }
+      }
+    });
+  });
+
+  document.querySelectorAll(".distrib-clientes-lista .distrib-item").forEach(function(el){
+    observer.observe(el, { attributes: true });
+  });
+})();
+</script>
+
+<script src="/assets/mapa2d.js" defer></script>
+</body>
+</html>
